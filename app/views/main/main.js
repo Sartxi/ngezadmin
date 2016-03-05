@@ -2,7 +2,7 @@
 (function() {
     /**
      * @ngdoc function
-     * @name todoApp.controller:MainCtrl
+     * @name ezadmin.controller:MainCtrl
      * @description
      * # MainCtrl
      * Main controller of the todoApp fot viewing and adding to do items
@@ -88,5 +88,5 @@
         init();
     }
 
-    angular.module('mytodoApp').controller('MainCtrl', MainCtrl);
+    angular.module('ezadmin').controller('MainCtrl', MainCtrl);
 })();

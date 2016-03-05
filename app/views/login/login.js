@@ -2,7 +2,7 @@
 (function() {
     /**
      * @ngdoc function
-     * @name todoApp.controller:LoginCtrl
+     * @name ezadmin.controller:LoginCtrl
      * @description
      * # LoginCtrl
      * Backand login control - need to implement in order to get the token for authentication
@@ -34,6 +34,6 @@
         init();
     }
 
-    angular.module('mytodoApp')
+    angular.module('ezadmin')
         .controller('LoginCtrl', LoginCtrl);
 })();

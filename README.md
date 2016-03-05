@@ -1,8 +1,5 @@
-# Todo Project
-A simple website demonstrating CRUD with Backand, built using [yeoman](http://yeoman.io/) for Angular
-
-## Example
-You can review the example @ [codepen](http://codepen.io/backand/pen/OyKxOB)
+# NG EzAdmin
+A simple admin built with Angular using CRUD with Backand
 
 ## Prerequisites
 You will need:
@@ -34,8 +31,8 @@ To get the application running, perform the following steps:
 3. Run the following commands from the console:
 
   ```bash
-  git clone https://github.com/backand/angular-yeoman-todos.git
-  cd angular-yeoman-todos
+  git clone https://github.com/Sartxi/ngezadmin.git
+  cd ngezadmin
 
   npm install
   bower install

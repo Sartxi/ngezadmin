@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('mytodoApp', [
+angular.module('ezadmin', [
   'ngResource',
   'ngSanitize',
   'ui.router',

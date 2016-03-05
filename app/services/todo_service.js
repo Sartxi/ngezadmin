@@ -1,6 +1,3 @@
-/**
- * Created by Itay Herskovits  on 2/1/15.
- */
 (function () {
 
     function TodoService($http, Backand) {
@@ -64,6 +61,6 @@
 
     }
 
-    angular.module('mytodoApp')
+    angular.module('ezadmin')
         .service('TodoService', ['$http', 'Backand', TodoService]);
 }());
