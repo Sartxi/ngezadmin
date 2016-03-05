@@ -1,3 +1,4 @@
+'use strict';
 (function () {
 
     function TodoService($http, Backand) {
@@ -52,12 +53,12 @@
             return $http({
                 method: 'DELETE',
                 url : Backand.getApiUrl() + baseUrl + self.name + '/' + id
-            })
+            });
         };
 
         self.logout = function(){
             Backand.signout();
-        }
+        };
 
     }
 

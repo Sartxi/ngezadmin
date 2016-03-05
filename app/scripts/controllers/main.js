@@ -8,6 +8,7 @@
      * Main controller of the todoApp fot viewing and adding to do items
      */
 
+
     function MainCtrl($state, TodoService) {
         var self = this;
 
