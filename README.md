@@ -1,5 +1,5 @@
 # NG EzAdmin
-A simple admin built with Angular using CRUD with Backand
+A simple CMS built with Angular using CRUD with Backand
 
 ## Prerequisites
 You will need:
