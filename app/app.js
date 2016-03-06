@@ -6,7 +6,10 @@ angular.module('ezadmin', [
     'ui.router',
     'ui.sortable',
     'mytodoApp.config.interceptors',
-    'backand'
+    'backand',
+    'ngStorage',
+    'angular.filter',
+    'ui.bootstrap'
 ])
 .config(['$stateProvider','$httpProvider', '$urlRouterProvider', 'BackandProvider',
     function($stateProvider, $httpProvider, $urlRouterProvider, BackandProvider)
