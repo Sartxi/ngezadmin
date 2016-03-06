@@ -1,0 +1,423 @@
+$brand-primary: #666;
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+// Mixins
+@mixin rad ($rad) {
+    border-radius: $rad;
+    -webkit-border-radius: $rad;
+    -moz-border-radius: $rad;
+}
+@mixin bs ($bs) {
+    box-shadow: $bs;
+    -webkit-box-shadow: $bs;
+    -moz-box-shadow: $bs;
+}
+@mixin ts ($ts) {text-shadow: $ts;}
+
+// Variables
+$font: 'Open Sans', sans-serif!important;
+$solid: #666;
+$accent: #8ec640;
+$dark: #23527c;
+
+// Globals
+.accentText {color: $accent}
+.solidText {color: $solid}
+.browsehappy {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    font-size: 21px;
+    padding: 20px;
+}
+body {font-family: $font;-webkit-backface-visibility: hidden;}
+header {background: $solid;}
+a, .pagination, .carousel, .panel-title a {cursor: pointer; color: $accent; &:hover {color: darken($accent, 20%);}}
+a:focus, button:focus {outline:0!important;}
+.btn-success { background-color:$accent;}
+.btn-mega {padding: 10px 22px!important}
+
+.mainAlerts {
+    position: fixed;
+    bottom: 9px;
+    right: 28px;
+    max-width: 500px;
+    min-width: 300px;
+    z-index: 999999999;
+    .alert-success, .alert-danger, .alert-info, .alert-warning {opacity: .8; border: 1px solid; border-right: 8px solid; padding: 12px 15px; @include rad(4px 0 0 4px);}
+}
+
+// ... Bootstrap CSS Customizations
+.btn, .well, .form-control { @include rad(2px);}
+.btn-default {background: #eee; border: #eee;}
+.badge {background-color:$solid;}
+.btn-panel {
+    background: white;
+    color: $accent;
+    padding: 26px;
+    font-size: 18px;
+    .emtAddBtnIcon {
+        display: block;
+        font-size: 80px;
+        margin-bottom: 10px;
+    }
+    &:hover {background: #eee}
+}
+.form-control {border:1px solid #ddd;}
+.panel-custom, .btn-panel {
+    border: 8px solid #eee;
+    @include rad(2px);
+    .panel-heading {
+        border-bottom: 2px solid $accent!important;
+        font-size: 16px;
+        .popover-content {color:#999;}
+        &.clickHeading {cursor: pointer}
+    }
+    ul.panelist {
+        margin-bottom: 0;
+        max-height: 200px;
+        overflow-y: scroll;
+        li {
+            padding: 5px 10px;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+            &.active {
+                background:#eee;
+                a {
+                    color: $dark;
+                    .badge:hover {background: $solid}
+                    &:hover {color: $solid; text-decoration: none}
+                }
+            }
+            &:last-child { border:0;}
+            .defs {
+                color: $solid;
+                cursor: pointer;
+                &:hover {color: $dark;}
+            }
+            a {
+                color: $dark;
+                .badge:hover {background: $accent}
+                &:hover {color: $accent; text-decoration: none}
+            }
+        }
+    }
+}
+.panel-questions {
+    background:#eee;
+    .panel-body {background:white;}
+    h3 {margin:10px;}
+}
+.alert {border:0;}
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+}
+.normalModal {
+    .modal-dialog {margin: 7% auto;}
+    .modal-sm {width: 365px;}
+    .modal-content {border: 12px solid rgba(255, 255, 255, 0.5); box-shadow: none}
+}
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus { background:$dark;}
+ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
+.dropdown-menu {padding:5px;}
+.dropdown-menu > li > a:hover {background:$accent; color:white;}
+.ta-root.focussed > .ta-scroll-window.form-control, .form-control:focus {
+    @include bs(0 0 3px 1px rgba(142, 198, 64, .6));
+    border-color: $accent;
+}
+.pagination > li > a, .pagination > li > span {color: $accent}
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {background: $accent; border-color: darken($accent, 10%);}
+.uib-day button, .uib-month button, .uib-year button, .uib-daypicker .btn, .uib-monthpicker .btn, .uib-yearpicker .btn, .uib-datepicker-popup li .uib-datepicker .uib-daypicker:focus {outline: 0!important; border: 0!important;}
+.uib-daypicker .text-info {color: $accent;}
+.uib-daypicker .btn-info {background: $accent;}
+
+// ... animation
+.animate-show {
+  line-height: 20px;
+  opacity: 1;
+}
+.animate-show.ng-hide-remove {
+  transition: all linear 0.5s;
+}
+.animate-show.ng-hide {
+  opacity: 0;
+  padding: 0 10px;
+}
+
+// ... Admin Specific
+#admin {
+    margin-bottom: 400px;
+    .mainTitle {margin-top: 33px;}
+    .menuToggle {display: none;}
+    .colMenu {display: none!important;}
+    .loading {
+        position:absolute;
+        color:$accent;
+        background: rgba( white, .8 );
+        right:0;
+        left:0;
+        z-index: 5;
+        height: 100%;
+        img {max-width: 80px; position: absolute; margin: 0 auto; left: 0; right: 0; top: 100px;}
+    }
+    .form-group {
+        label small {color: #999; font-weight: 400}
+    }
+    .upBtn {
+        position: fixed;
+        bottom: 10px;
+        left: 113px;
+        z-index: 999;
+        font-size: 24px;
+        padding: 5px 12px 8px 15px;
+        color: white;
+        background-color: rgba(225, 225, 225, .8);
+        &:focus {border: 0; outline: 0;}
+    }
+    .user {
+        position: relative;
+        .userLogo {position: fixed; right: 20px; top: 20px; max-width: 100px; z-index: 6; background: white}
+    }
+    .adminMenu {
+        background:url('/images/adminMenu.png');
+        height: 100%;
+        display: block;
+        position: fixed;
+        width: 100px;
+        border-right:2px solid #222;
+        z-index: 6;
+        ul {
+            li {
+                a {
+                    display: block;
+                    width: 100%;
+                    padding: 15px 0;
+                    border-bottom:1px solid #222;
+                    color: white;
+                    .glyphicon {font-size: 33px;}
+                    &.active {background: #222; border-right: 5px solid $accent; text-decoration: none;}
+                    &:hover {color: white; cursor: pointer; background: #222; text-decoration: none}
+                }
+            }
+        }
+    }
+    .editMode p {color: #999;}
+    .editingTable {
+        font-size: 16px;
+        margin-top: 20px;
+        .editingRow {
+            padding: 15px 15px 0;
+            border-bottom: 1px solid #ccc;
+            p {margin-bottom: 15px}
+            .glyphicon {margin-right: 10px;}
+            .action.glyphicon {margin-right: 0;}
+            .editArea {
+                background: #eee;
+                padding: 30px 32px;
+                border-top: 1px solid silver;
+            }
+        }
+        .tableHead {
+            display: block;
+            width: 100%;
+            background: $solid;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            padding: 10px 0;
+            @include rad(2px);
+        }
+        tags-input {
+            .host {margin: 0;}
+            .tags {
+                display: block;
+                width: 100%;
+                min-height: 34px;
+                padding: 3px 2px;
+                font-size: 14px;
+                line-height: 1.428571429;
+                color: #555555;
+                background-color: #fff;
+                background-image: none;
+                border: 1px solid #ccc;
+                @include rad(2px);
+                @include bs(inset 0 1px 1px rgba(0, 0, 0, 0.075));
+                transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+                &.focused {@include bs(0 0 3px 1px rgba(142, 198, 64, .6)); border-color: $accent;}
+                .input {margin: 0;}
+                .tag-item {
+                    height: 22px;
+                    line-height: 22px;
+                    margin: 2px;
+                    padding: 0 8px;
+                    background: darken(#eee, 10%);
+                    border:0;
+                    color: #222;
+                    &.selected {
+                        background: #d43f3a;
+                        border:0;
+                        color: white;
+                        .remove-button {color: white;}
+                    }
+                    .remove-button {color: #222;}
+                }
+            }
+            .autocomplete {
+                font-size: 13px;
+                @include rad(5px);
+                @include bs(0 0 3px 1px rgba(0, 0, 0, .3));
+                border-color: #eee;
+                .suggestion-item {
+                    font-size: 13px;
+                }
+                .suggestion-item.selected, .suggestion-item.selected em {
+                    background-color: $solid;
+                }
+            }
+        }
+        .wysyEdit .btn-group {
+            margin-bottom: 10px;
+            .btn {font-size: 11px;}
+        }
+    }
+    .subPage {
+        background: #f7f7f7;
+        .subPageIcon {color: darken(#ddd, 10%); margin-right: 10px;}
+    }
+    .moduleLabels {font-size: 16px; margin-left: 20px;}
+    .testEditArea {
+        background: #eee;
+        padding-top: 26px;
+        margin-top: 13px;
+        margin-bottom: -10px;
+        padding-bottom: 19px;
+        border-top: 1px solid silver;
+    }
+    #view-selector-container {
+        table {margin-bottom: 10px}
+        .dcs-a-dcs-fc-dcs-fb-dcs-cb {width: 100%}
+    }
+    #settings {
+        .userIcon {font-size: 31px; background: #eee; padding: 20px; margin: 10px 13px 20px 0; color:$accent; @include rad(50px);}
+    }
+}
+#imageGallery {
+    background: #f7f7f7;
+    .imageGallery {
+        display: block;
+        overflow: hidden;
+        margin-left: 0;
+        margin-right: 0;
+        .imageItem {
+            margin-top: 11px;
+            .imgBtn {cursor: pointer; &:hover {border: 8px solid #ddd;}}
+        }
+    }
+    .galleryImg {
+        margin: 10px auto;
+        display: block;
+        &.sml {max-height: 85px;}
+        &.mdm {max-height: 100px;}
+        &.lrg {max-height: 400px;}
+    }
+    .addImager {
+        .glyphicon {font-size: 33px}
+    }
+    .dropBox {
+        border: 5px dashed darken(#eee, 5%);
+        color: darken(#eee, 10%);
+        padding: 50px 0;
+        text-align: center;
+        font-size: 23px;
+        margin-top: 17px;
+    }
+    .dragover {border: 5px dashed $accent; color: $accent;}
+    .imgPreview {
+        margin-top: 10px;
+        padding: 20px 0;
+        img {margin: 0 auto;}
+    }
+}
+.bck {@include rad(43px); padding: 3px 6px;}
+#layoutGallery {
+    .layoutSelector {
+        height: 150px;
+        margin: 0 auto;
+        display: block;
+        cursor: pointer;
+        border: 2px solid white;
+        @include rad(25px);
+        &:hover {border: 2px solid $accent;}
+    }
+}
+.lngTabs {margin-bottom: 30px;}
+.blogLngPills {
+    font-size: 11px;
+    border-bottom: 1px solid #eee;
+    li > a {padding: 5px; @include rad(0);}
+    li.active > a, li.active > a:hover, li.active > a:focus {
+        background: $accent;
+    }
+}
+
+// ... Admin Break Points
+@media (max-width: 1400px) {
+    #admin {
+        .menuToggle {
+            font-size: 40px;
+            padding: 0 10px;
+            background: #eee;
+            position: relative;
+            top: 0;
+            left: 0;
+            z-index: 999;
+            display: inline-block;
+            &:hover {cursor: pointer; color: darken($accent, 15%);}
+        }
+        .colMenu {display: none;}
+        .user{
+            position: relative;
+            .userLogo {position: absolute; right: 0; top: 0; max-width: 80px; z-index: 6; background: white; padding: 10px; @include rad(10px);}
+        }
+        .adminMenu {
+            background:url('/images/adminMenu.png');
+            width: 100%;
+            display: block;
+            overflow: hidden;
+            position: relative;
+            border-bottom:2px solid #222;
+            border-right: 0;
+            ul {
+                li {
+                    float: left;
+                    display: inline;
+                    font-size: 11px;
+                    a {
+                        display: block;
+                        padding: 15px 15px 8px;
+                        border: 0;
+                        color: white;
+                        .glyphicon {font-size: 20px;}
+                        &.active {background: #222; border-bottom: 5px solid $accent; border-right: 0; &:hover {border-bottom: 5px solid $accent;}}
+                        &:hover {color: white; cursor: pointer; background: #222; border-bottom: 5px solid #222; text-decoration: none}
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 700px) {
+    #admin {
+        .adminMenu ul li {
+            font-size: 11px;
+            a {.menuItemText {display: none;}}
+        }
+    }
+}
