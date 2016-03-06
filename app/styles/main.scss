@@ -151,6 +151,27 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
   padding: 0 10px;
 }
 
+//login Specific
+#login {
+    position: relative;
+    z-index: 9;
+    .loginContent {
+        z-index: 9;
+        position: relative;
+        .loginLogo {max-width: 150px; margin: 0 auto;}
+        .login-panel {position: absolute; top: 60px; width: 100%; padding: 15px 30px;}
+    }
+    .loginBackDrop {
+        background: $solid url('../assets/images/logintexture.png');
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+    }
+}
+
 // ... Admin Specific
 #admin {
     margin-bottom: 400px;

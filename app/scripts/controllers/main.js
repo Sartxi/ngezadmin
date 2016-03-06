@@ -1,4 +1,5 @@
 'use strict';
+
 (function() {
     /**
      * @ngdoc function
@@ -9,71 +10,21 @@
      */
 
 
-    function MainCtrl($state, TodoService) {
+    function MainCtrl($state, request) {
         var self = this;
 
         /**
          * init by reading the to do list from the database
          */
         function init() {
-            TodoService.name = 'todo';
-            readTodoList();
+            request.name = 'testinground';
         }
-
-        /**
-         * Read the to do list from the database
-         */
-        function readTodoList(){
-            TodoService.readAll().then(onReadListSuccess, errorHandler);
-        }
-
-        /**
-         * Success promise call with the lit data
-         * @param data
-         */
-        function onReadListSuccess(todos){
-            self.todos = todos;
-        }
-
-        /**
-         * Update item in the database
-         * @param todo
-         */
-        self.updateTodo = function (todo){
-            TodoService.update(todo.id, todo).then(null, errorHandler);
-        };
-
-        /**
-         * Add new item
-         */
-        self.addTodo = function () {
-            TodoService.create({description: self.todo}).then(onAddTodoSuccess, errorHandler);
-            self.todo = '';
-        };
-
-        /**
-         * Success promise call with the new item added
-         * @param data
-         */
-        function onAddTodoSuccess(todo){
-            self.todos.push(todo);
-        }
-
-        /**
-         * Remove item from the database and from the list
-         * @param todo
-         */
-        self.removeTodo = function (todo) {
-            TodoService.delete(todo.id).then(function() {
-                self.todos.splice(self.todos.indexOf(todo), 1);
-            }, errorHandler);
-        };
 
         /**
          * Logout from Backand
          */
         self.logout = function () {
-            TodoService.logout();
+            request.logout();
             $state.go('login');
         }
 
@@ -89,5 +40,5 @@
         init();
     }
 
-    angular.module('ezadmin').controller('MainCtrl', MainCtrl);
+    angular.module('ezadmin').controller('MainCtrl', ['$state', 'request', MainCtrl]);
 })();

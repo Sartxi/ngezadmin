@@ -1,4 +1,5 @@
 'use strict';
+
 (function() {
     /**
      * @ngdoc function
@@ -9,10 +10,11 @@
      */
     function LoginCtrl(Backand, $location) {
         var self = this;
+
         function init() {
             self.username = '';
             self.password = '';
-            self.appName  = '';
+            self.appName  = 'testinground';
         }
 
         self.signIn = function() {
@@ -21,12 +23,9 @@
 
             //sign in to Backand
             Backand.signin(self.username, self.password)
-                .then(
-                function () {
+                .then(function () {
                     $location.path('/');
-                },
-                function (data) {
-                    console.log(data);
+                }, function (data) {
                     self.error = data && data.error_description || 'Unknown error from server';
                 }
             );
@@ -35,5 +34,5 @@
     }
 
     angular.module('ezadmin')
-        .controller('LoginCtrl', LoginCtrl);
+        .controller('LoginCtrl', ['Backand', '$location', LoginCtrl]);
 })();

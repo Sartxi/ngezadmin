@@ -19,7 +19,7 @@ angular.module('ezadmin', [
 
         $httpProvider.interceptors.push('todoHttpInterceptor');
         $urlRouterProvider.otherwise("/");
-        $stateProvider.state('todos', {
+        $stateProvider.state('home', {
             url: '/',
             templateUrl: 'views/main.html',
             controller: 'MainCtrl as vm'
