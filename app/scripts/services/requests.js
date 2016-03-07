@@ -8,7 +8,7 @@
 
         self.name = null;
 
-        self.readAll = function () {
+        self.pagesList = function () {
             var defer = $q.defer();
 
             $http.get(Backand.getApiUrl() + baseUrl + self.name)

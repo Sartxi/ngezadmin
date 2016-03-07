@@ -1,38 +1,20 @@
-<div class="container-fluid">
-    <a href="" ng-click="vm.logout()">Log out</a>
-    <h2>My todos</h2>
-
-    <!-- Todos input -->
-    <form role="form" ng-submit="vm.addTodo()">
-        <div class="row">
-            <div class="input-group">
-                <input type="text" ng-model="vm.todo" placeholder="What needs to be done?" class="form-control">
-                <span class="input-group-btn">
-                  <input type="submit" class="btn btn-primary" value="Add" ng-disabled="!vm.todo">
-                </span>
+<div id="pages" class="container-fluid">
+    <div class="row">
+        <div class="col-md-11 col-md-offset-1">
+            <loader ng-show="loading"></loader>
+            <div class="col-md-11">
+                <h1 class="mainTitle"><span class="glyphicon glyphicon-file accentText"></span> Pages</h1>
+                <hr>
+            </div>
+            <div class="col-md-11 editingTable">
+                <div class="tableHead">
+                    <div class="col-md-6 col-xs-12">Page</div>
+                    <div class="col-md-6 hidden-sm hidden-xs">URL</div>
+                </div>
+                <div class="editingRow" ng-repeat="page in pages" ng-class="{'subPage': page.subPage}">
+                    <pg-listing page="page" edit="editPage(page.id)"></pg-listing>
+                </div>
             </div>
         </div>
-    </form>
-    <p></p>
-
-    <!-- Todos list -->
-    <div>
-        <p  class="input-group"
-            ng-repeat="todo in vm.todos | orderBy:'-Id'"
-            style="padding:5px 10px; cursor: move;"
-            ng-class="{'todo-completed': todo.completed}">
-            <span class="input-group-btn">
-                <button class="btn"><input type="checkbox" class="btn btn-primary" ng-model="todo.completed" ng-click="vm.updateTodo(todo)"></button>
-            </span>
-            <input  type="text"
-                    ng-disabled="todo.completed"
-                    ng-model="todo.description"
-                    ng-change="vm.updateTodo(todo)"
-                    ng-model-options="{updateOn: 'blur'}"
-                    class="form-control" >
-            <span class="input-group-btn">
-                <button class="btn btn-danger" ng-click="vm.removeTodo(todo)" aria-label="Remove">X</button>
-            </span>
-        </p>
     </div>
 </div>

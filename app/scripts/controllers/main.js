@@ -10,14 +10,21 @@
      */
 
 
-    function MainCtrl($state, request) {
+    function MainCtrl($state, $scope, request) {
         var self = this;
 
         /**
          * init by reading the to do list from the database
          */
         function init() {
-            request.name = 'testinground';
+            request.name = 'pages';
+            getPages();
+        }
+
+        function getPages() {
+            request.pagesList().then(function (res) {
+                $scope.pages = res.data;
+            });
         }
 
         /**
@@ -40,5 +47,5 @@
         init();
     }
 
-    angular.module('ezadmin').controller('MainCtrl', ['$state', 'request', MainCtrl]);
+    angular.module('ezadmin').controller('MainCtrl', ['$state', '$scope', 'request', MainCtrl]);
 })();

@@ -1,7 +1,4 @@
 $brand-primary: #666;
-// bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
-// endbower
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 // Mixins
 @mixin rad ($rad) {
@@ -207,7 +204,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
         .userLogo {position: fixed; right: 20px; top: 20px; max-width: 100px; z-index: 6; background: white}
     }
     .adminMenu {
-        background:url('/images/adminMenu.png');
+        background:url('../assets/images/adminMenu.png');
         height: 100%;
         display: block;
         position: fixed;
