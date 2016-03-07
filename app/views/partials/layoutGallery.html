@@ -1,0 +1,12 @@
+<div class="modal-header">
+	<a class="pull-right" type="button" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+<div id="layoutGallery" class="modal-body">
+	<div class="row">
+		<div ng-repeat="layout in layoutGallery" class="col-md-3 text-center">
+			<img ng-src="{{layout.imgurl}}" class="layoutSelector" ng-click="selectLayout(layout, $index)"/><br>
+			<h4>{{layout.title}}</h4>
+		</div>
+	</div>
+</div>

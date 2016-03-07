@@ -1,0 +1,92 @@
+<div class="modal-header">
+	<a class="pull-right" type="button" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+    <h3 class="modal-title"><a ng-click="showALL()" class="btn btn-default bck" ng-show="activeImg >= 0 || addImage"  uib-tooltip="Back to Gallery" tooltip-placement="bottom"><span class="glyphicon glyphicon-chevron-left"></span></a>&nbsp; {{title}}</h3>
+</div>
+<div id="imageGallery" class="modal-body">
+	<div class="row imageGallery">
+
+		<!-- Upload Image -->
+		<div class="col-md-12" ng-show="addImage">
+			<div class="row">
+				<form name="uploadImage">
+					<div class="col-md-12">
+						<button type="button" class="btn btn-default btn-sm" ngf-select ng-model="imgFile" name="file" ngf-accept="'image/*'"><span class="glyphicon glyphicon-search"></span> Choose Image</button>
+						<div ngf-drop ngf-select class="dropBox" ng-hide="imgFile" ng-model="imgFile" name="dragDrop" ngf-accept="'image/*'" ngf-allow-dir="true" ngf-drag-over-class="'dragover'">
+							<span class="fa fa-picture-o"></span> Drop Image Here
+						</div>
+						<div class="imgPreview" ng-show="imgFile">
+							<img ngf-src="imgFile" class="img-responsive" />
+						</div>
+						<hr>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<!-- Buttons -->
+		<div class="col-md-12" ng-hide="activeImg >= 0">
+			<div class="row">
+				<div class="col-md-6">
+					<button type="button" ng-show="addImage" ng-click="uploadPic(picFile)" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-save"></span> Save Image</button>
+					<button type="button" class="btn" ng-class="{'btn-success btn-sm': !addImage, 'btn-default btn-sm': addImage}" ng-click="addImage = !addImage"><span ng-class="{'glyphicon glyphicon-plus': !addImage, 'glyphicon glyphicon-remove': addImage}"></span> <span ng-show="!addImage">Add Image</span><span ng-show="addImage">Cancel</span></button>
+				</div>
+				<div class="col-md-6 text-right">
+					<div class="btn-group" ng-hide="addImage">
+						<label class="btn btn-primary btn-xs" ng-model="gridType" uib-btn-radio="0" uib-tooltip="Small" tooltip-placement="bottom"><span class="fa fa-minus-circle"></span></label>
+						<label class="btn btn-primary btn-xs" ng-model="gridType" uib-btn-radio="1" uib-tooltip="Medium" tooltip-placement="bottom"><span class="fa fa-picture-o"></span></label>
+						<label class="btn btn-primary btn-xs" ng-model="gridType" uib-btn-radio="2" uib-tooltip="Large" tooltip-placement="bottom"><span class="fa fa-plus-circle"></span></label>
+				    </div>
+				</div>
+				<div class="col-md-12"><br /></div>
+			</div>
+		</div>
+
+		<!-- Image Gallery -->
+		<div ng-repeat="img in imgGallery" class="imageItem" ng-class="layoutCol" ng-hide="hasActive($index) || addImage">
+			<div ng-class="{'panel panel-default panel-custom imgBtn': !activeSpecs($index)}" ng-click="makeImgActive($index)">
+				<div ng-class="{'panel-body': !activeImg && activeImg !== 0}">
+					<div class="row">
+						<form name="imgSpecs">
+							<div class="col-md-4" ng-show="activeSpecs($index)">
+								<div class="form-group">
+									<label>Alt Tag</label>
+									<input type="text" class="form-control input-sm" ng-model="img.imgalt">
+								</div>
+								<div class="form-group">
+									<label>Image Width</label>
+									<input type="text" class="form-control input-sm" ng-model="img.imgwidth">
+								</div>
+								<div class="form-group">
+									<label>Align&nbsp;&nbsp;</label>
+									<div class="btn-group">
+										<label class="btn btn-default btn-sm" ng-model="img.float" uib-btn-radio="'left'">Left</label>
+										<label class="btn btn-default btn-sm" ng-model="img.float" uib-btn-radio="'middle'">Middle</label>
+										<label class="btn btn-default btn-sm" ng-model="img.float" uib-btn-radio="'right'">Right</label>
+								    </div>
+								</div>
+								<div class="form-group">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" ng-model="img.linked"> Link Image
+										</label>
+									</div>
+								</div>
+								<div class="form-group" ng-show="img.linked">
+									<label>Link</label>
+									<input type="text" class="form-control input-sm" ng-model="img.imghref">
+								</div>
+								<div class="form-group">
+									<hr>
+									<button type="button" class="btn btn-success btn-sm" ng-click="selectImg(img)">Use This Image</button>
+								</div>
+							</div>
+						</form>
+						<div ng-class="{'col-md-12': !activeSpecs($index),'col-md-8': activeSpecs($index)}">
+							<img ng-src="{{img.imgurl}}" class="galleryImg" ng-class="imgSize"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

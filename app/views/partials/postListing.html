@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="col-md-5 col-sm-6 col-xs-12">
+        <p><a ng-click="edit()"><span class="glyphicon glyphicon-pencil"></span></a> {{post.page}}</p>
+    </div>
+    <div class="col-md-4 hidden-sm hidden-xs">
+        <p>/{{post.en.url}}</p>
+    </div>
+    <div class="col-md-3 col-sm-6 hidden-xs text-right">
+        <p>{{post.publishDate | displayWrittenDate}}</p>
+    </div>
+</div>

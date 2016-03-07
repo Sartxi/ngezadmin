@@ -1,0 +1,12 @@
+<div id="newPage" class="modal-body">
+	<div class="text-right">
+		<a ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+	</div>
+	<form name="newPageForm" ng-submit="ok(name)">
+		<div class="form-group">
+			<label>{{pageType}} Name:</label>
+			<input type="text" ng-model="name" class="form-control">
+		</div>
+		<button type="submit" class="btn btn-success">Create Page</button>
+	</form>
+</div>
