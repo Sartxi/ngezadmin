@@ -1,0 +1,25 @@
+<div id="pagesPage" class="container-fluid">
+    <div class="row">
+        <div class="col-md-11 col-md-offset-1">
+		    <loader ng-show="loading"></loader>
+		    <div class="col-md-11">
+		        <h1 class="mainTitle"><span class="glyphicon glyphicon-file accentText"></span> {{vm.page.name}}</h1>
+		        <hr>
+		    </div>
+		    <div class="col-md-11">
+		        <a ui-sref="pages"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+		    </div>
+		    <div class="col-md-11 editingTable">
+		        <div class="row">
+		            <div class="col-md-12">
+		                <div class="col-md-12 panel panel-custom">
+		                    <div class="panel-body">
+		                        <pg-details page="vm.page" tabs="multilingual" ng-if="!loading"></pg-details>
+		                    </div>
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>

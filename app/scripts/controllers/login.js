@@ -14,7 +14,7 @@
         function init() {
             self.username = '';
             self.password = '';
-            self.appName  = 'testinground';
+            self.appName  = 'sdbetg';
         }
 
         self.signIn = function() {

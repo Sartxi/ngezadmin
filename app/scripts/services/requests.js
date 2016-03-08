@@ -22,6 +22,20 @@
 			return defer.promise;
         };
 
+        self.getContent = function (id, collection) {
+            var defer = $q.defer();
+
+            $http.get(Backand.getApiUrl() + baseUrl + self.name + '/' + id + '/' + collection)
+			.success(function (res) {
+				defer.resolve(res);
+			})
+			.error(function (err) {
+				defer.reject(err);
+			});
+
+			return defer.promise;
+        }
+
         // self.readOne = function (id) {
         //     return $http({
         //         method: 'GET',

@@ -19,6 +19,11 @@
     "bootstrap-sass-official": "~3.3.4",
     "moment": "~2.10.4",
     "ngstorage": "~0.3.0",
+    "textAngular": "~1.5.0",
+    "ng-tags-input": "~3.0.0",
+    "ngAnalytics": "nganalytics#^1.1.4",
+    "ng-file-upload": "^12.0.1",
+    "ng-file-upload-shim": "^12.0.1",
     "es5-shim": "~4.1.0",
     "SHA-1": "~0.1.1"
   },

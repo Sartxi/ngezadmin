@@ -27,6 +27,6 @@
     };
   }
 
-  angular.module('mytodoApp.config.interceptors', [])
-    .factory('todoHttpInterceptor', ['$q', '$location','Backand', httpInterceptor]);
+  angular.module('ui.interceptors', [])
+    .factory('httpInterceptor', ['$q', '$location','Backand', httpInterceptor]);
 })();
