@@ -29,11 +29,6 @@
             $state.go('.page', {id: index});
         };
 
-        self.logout = function () {
-            request.logout();
-            $state.go('login');
-        }
-
         init();
     }
 
