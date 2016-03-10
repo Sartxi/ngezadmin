@@ -19,10 +19,10 @@
         }
 
         function getPages() {
-            request.pagesList().then(function (res) {
+            request.getPages().then(function (res) {
                 self.pages = res.data;
             });
-        }//set up message when request fails here ^^^^
+        }// ...set up message when request fails here ^^^^
 
         self.editPage = function (index) {
             $sessionStorage.pageID = index;
@@ -32,17 +32,32 @@
         init();
     }
 
+    angular.module('ezadmin')
+        .controller('PagesCtrl', ['$state', 'request', '$sessionStorage', PagesCtrl]);
+})();
+
+(function() {
+    /**
+     * @ngdoc function
+     * @name ezadmin.controller:PageCtrl
+     * @description
+     * # PagesCtrl
+     * Page controller of the ngezadmin
+     */
+
     function PageCtrl($state, request, $sessionStorage) {
         var self = this;
         var id = $sessionStorage.pageID;
 
         function init() {
             request.name = 'pages';
-            $scope.loading = true;
+            self.loading = true;
+            console.log('getting there');
+            getPage();
         }
 
-        function getPage(id, collection) {
-            request.getPage(id, collection).then(function (res) {
+        function getPage() {
+            request.getPage(id).then(function (res) {
                 console.log(res.data);
             });
         }
@@ -58,6 +73,5 @@
 
 
     angular.module('ezadmin')
-        .controller('PagesCtrl', ['$state', 'request', '$sessionStorage', PagesCtrl])
         .controller('PageCtrl', ['$state', 'request', '$sessionStorage', PageCtrl]);
 })();

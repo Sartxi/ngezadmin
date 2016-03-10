@@ -14,22 +14,20 @@
                         </p>
                         <div class="col-md-9">
                             <ul class="list-inline">
-                                <li><h4><ng-analytics-active-users label="Active Users:" default-ids="defaultIds" auth-container="embed-api-auth-container"></ng-analytics-active-users></h4></li>
+                                <li><h4><ng-analytics-active-users label="Active Users:" default-ids="vm.defaultIds" auth-container="embed-api-auth-container"></ng-analytics-active-users></h4></li>
                                 <li><h4><ng-analytics-active-users label="Current Users:" increase-class="text-success" decrease-class="text-danger" active-users-container="active-users-container-1" view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-active-users></h4></li>
                             </ul>
 
-                            <ng-analytics-chart ng-repeat="chart in charts" chart="chart" view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-chart>
+                            <ng-analytics-chart ng-repeat="chart in vm.charts" chart="chart" view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-chart>
 
                             <div class="row">
                                 <div class="col-md-6">
-                                    <ng-analytics-chart chart="browserChart" view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-chart>
+                                    <ng-analytics-chart chart="vm.browserChart" view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-chart>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <ng-analytics-view view-selector-container="view-selector-container" auth-container="embed-api-auth-container"></ng-analytics-view>
-                            <!-- <ng-analytics-report queries="queries" auth-container="embed-api-auth-container"></ng-analytics-report>
-                            <ng-analytics-report queries="queries" auth-container="embed-api-auth-container" view-selector-container="view-selector-container"></ng-analytics-report> -->
                         </div>
                     </div>
                 </div>

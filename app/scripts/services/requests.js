@@ -8,7 +8,7 @@
 
         self.name = null;
 
-        self.pagesList = function () {
+        self.getPages = function () {
             var defer = $q.defer();
 
             $http.get(Backand.getApiUrl() + baseUrl + self.name)
@@ -21,6 +21,20 @@
 
 			return defer.promise;
         };
+
+        self.getPage = function (id) {
+            var defer = $q.defer();
+
+            $http.get(Backand.getApiUrl() + baseUrl + self.name + '/' + id)
+			.success(function (res) {
+				defer.resolve(res);
+			})
+			.error(function (err) {
+				defer.reject(err);
+			});
+
+			return defer.promise;
+        }
 
         self.getContent = function (id, collection) {
             var defer = $q.defer();
