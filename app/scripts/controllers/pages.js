@@ -22,7 +22,7 @@
             request.pagesList().then(function (res) {
                 self.pages = res.data;
             });
-        }
+        }//set up message when request fails here ^^^^
 
         self.editPage = function (index) {
             $sessionStorage.pageID = index;
