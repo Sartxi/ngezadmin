@@ -1,0 +1,21 @@
+<div id="blogPost" class="row" ng-controller="BlogPostCtrl">
+    <loader ng-show="loading"></loader>
+    <div class="col-md-11">
+        <h1 class="mainTitle"><span class="glyphicon glyphicon-link accentText"></span> <span ng-show="newPost">New</span><span ng-hide="newPost">Edit</span> Blog Post</h1>
+        <hr>
+    </div>
+    <div class="col-md-11">
+        <a ui-sref="ezBlog"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+    </div>
+    <div class="col-md-11 editingTable">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12 panel panel-custom">
+                    <div class="panel-body">
+                        <post-details post="blogPost" tabs="multilingual" new="newPost" publish="publishPost()" delete="deletePost()" ng-if="!loading"></post-details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

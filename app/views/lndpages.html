@@ -1,0 +1,25 @@
+<div id="landing" class="row" ng-controller="LandingCtrl">
+    <loader ng-show="loading"></loader>
+    <div class="col-md-11">
+        <h1 class="mainTitle"><span class="glyphicon glyphicon-pushpin accentText"></span> Landing</h1>
+        <hr>
+    </div>
+    <div class="col-md-11" ng-hide="landingPages.length == 0">
+        <a ng-click="createPage('Landing Page')"><span class="glyphicon glyphicon-plus"></span> New Page</a>
+    </div>
+    <div class="col-md-11 editingTable">
+        <div class="tableHead">
+            <div class="col-md-6 col-sm-6 col-xs-6">Page</div>
+            <div class="col-md-6 col-sm-6 col-xs-6 text-right">URL</div>
+        </div>
+        <div class="editingRow" dir-paginate="page in landingPages | orderBy:'-id' | itemsPerPage: 15">
+            <lnd-listing page="page" edit="lndPage(page.id)"></lnd-listing>
+        </div>
+        <dir-pagination-controls></dir-pagination-controls>
+        <div ng-show="landingPages.length == 0">
+            <br />
+            <button type="button" class="btn-panel" ng-click="createPage('Landing Page')"><span class="emtAddBtnIcon glyphicon glyphicon-plus"></span>ADD A PAGE</button>
+            <hr>
+        </div>
+    </div>
+</div>

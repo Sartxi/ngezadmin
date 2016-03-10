@@ -25,7 +25,6 @@
         }
 
         self.editPage = function (index) {
-            console.log(index);
             $sessionStorage.pageID = index;
             $state.go('.page', {id: index});
         };
@@ -57,11 +56,6 @@
             request.getContent(id, collection).then(function (res) {
                 console.log(res.data);
             });
-        }
-
-        self.logout = function () {
-            request.logout();
-            $state.go('login');
         }
 
         init();

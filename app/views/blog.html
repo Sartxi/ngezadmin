@@ -1,0 +1,58 @@
+<div id="blog" class="row" ng-controller="BlogCtrl">
+    <loader ng-show="loading"></loader>
+    <div class="col-md-11">
+        <h1 class="mainTitle"><span class="glyphicon glyphicon-link accentText"></span> Blog</h1>
+        <hr>
+    </div>
+    <div class="col-md-11" ng-hide="blogPosts.length == 0">
+        <a ng-click="createPage('Blog Post')"><span class="glyphicon glyphicon-plus"></span> Add Post</a>
+    </div>
+    <div class="col-md-11 editingTable">
+        <div class="row">
+            <div class="col-lg-9 col-md-8 col-sm-7">
+                <div class="tableHead">
+                    <div class="col-md-5 col-sm-6 col-xs-12">Post Title</div>
+                    <div class="col-md-4 hidden-sm hidden-xs">URL</div>
+                    <div class="col-md-3 col-sm-6 hidden-xs text-right">Date Published</div>
+                </div>
+                <div class="editingRow" dir-paginate="post in blogPosts | orderBy:'-id' | itemsPerPage: 15">
+                    <post-listing class="wysyEdit" post="post" edit="blogPost(post.id)"></post-listing>
+                </div>
+                <dir-pagination-controls></dir-pagination-controls>
+                <div ng-show="blogPosts.length == 0">
+                    <br />
+                    <button type="button" class="btn-panel" ng-click="createPage('Blog Post')"><span class="emtAddBtnIcon glyphicon glyphicon-plus"></span>ADD A POST</button>
+                    <hr>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-5">
+                <div class="panel panel-default panel-custom" ng-hide="!blogCategories">
+                    <div class="panel-heading clickHeading" ng-click="colCat = !colCat">
+                        <a class="pull-right"><i class="fa" ng-class="{'fa-caret-square-o-up':colCat,'fa-caret-square-o-down':!colCat}" uib-tooltip="View All"></i></a>
+                        <span class="glyphicon glyphicon-bookmark solidText hidden-xs"></span> Categories
+                    </div>
+                    <ul class="nav nav-pills nav-justified blogLngPills" ng-show="multilingual" uib-collapse="!colCat">
+                        <li ng-class="{active: blogCategories === engCats}"><a ng-click="blogCategories = engCats">English</a></li>
+                        <li ng-class="{active: blogCategories === espCats}"><a ng-click="blogCategories = espCats">Spanish</a></li>
+                    </ul>
+                    <ul class="list-unstyled panelist" uib-collapse="!colCat">
+                        <li ng-repeat="category in blogCategories">{{category.text}}</li>
+                    </ul>
+                </div>
+                <div class="panel panel-default panel-custom" ng-hide="!blogTags">
+                    <div class="panel-heading clickHeading" ng-click="colTab = !colTab">
+                        <a class="pull-right"><i class="fa" ng-class="{'fa-caret-square-o-up':colTab,'fa-caret-square-o-down':!colTab}" uib-tooltip="View All"></i></a>
+                        <span class="glyphicon glyphicon-tags solidText hidden-xs"></span> Tags
+                    </div>
+                    <ul class="nav nav-pills nav-justified blogLngPills" ng-show="multilingual" uib-collapse="!colTab">
+                        <li ng-class="{active: blogTags === engTags}"><a ng-click="blogTags = engTags">English</a></li>
+                        <li ng-class="{active: blogTags === espTags}"><a ng-click="blogTags = espTags">Spanish</a></li>
+                    </ul>
+                    <ul class="list-unstyled panelist" uib-collapse="!colTab">
+                        <li ng-repeat="tag in blogTags">{{tag.text}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

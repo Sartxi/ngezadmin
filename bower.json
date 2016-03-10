@@ -14,7 +14,7 @@
     "angular-ui-router": "~0.2.13",
     "angular-ui-utils": "~0.2.3",
     "angular-filter": "~0.5.4",
-    "angular-bootstrap": "~0.13.0",
+    "angular-bootstrap": "^1.2.4",
     "bootstrap": "~3.0.3",
     "bootstrap-sass-official": "~3.3.4",
     "moment": "~2.10.4",
