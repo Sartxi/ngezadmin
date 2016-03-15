@@ -10,11 +10,12 @@
      */
 
 
-    function AppCtrl($state, request, $sessionStorage) {
+    function AppCtrl($rootScope, $state, request, $sessionStorage) {
         var self = this;
 
         function init() {
             request.name = 'pages';
+            $rootScope.multilingual = true; //use settings when available
         }
 
         self.logout = function () {
@@ -26,5 +27,5 @@
     }
 
     angular.module('ezadmin')
-        .controller('AppCtrl', ['$state', 'request', '$sessionStorage', AppCtrl]);
+        .controller('AppCtrl', ['$rootScope', '$state', 'request', '$sessionStorage', AppCtrl]);
 })();

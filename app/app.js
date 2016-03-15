@@ -47,7 +47,6 @@ angular.module('ezadmin', [
         .state('pages.page', {
             url: '/:id',
             title: 'Page',
-            controller: 'PageCtrl as vm',
             views: {
                 '@': {templateUrl: 'views/pages.page.html'}
             }

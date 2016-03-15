@@ -1,7 +1,7 @@
-<div id="pagesPage" class="container-fluid">
+<div id="pagesPage" class="container-fluid" ng-controller="PageCtrl as vm">
     <div class="row">
         <div class="col-md-11 col-md-offset-1">
-		    <loader ng-show="loading"></loader>
+		    <loader ng-show="vm.loading"></loader>
 		    <div class="col-md-11">
 		        <h1 class="mainTitle"><span class="glyphicon glyphicon-file accentText"></span> {{vm.page.name}}</h1>
 		        <hr>
@@ -14,7 +14,17 @@
 		            <div class="col-md-12">
 		                <div class="col-md-12 panel panel-custom">
 		                    <div class="panel-body">
-		                        <!-- <pg-details page="vm.page" tabs="multilingual" ng-if="!loading"></pg-details> -->
+                                <br>
+                                <ul class="nav nav-tabs lngTabs">
+                                    <li ng-class="{active: vm.openedContent('en')}" uib-tooltip="English"><a ng-click="vm.editContent('en')">EN</a></li>
+                                    <li ng-class="{active: vm.openedContent('es')}" uib-tooltip="Spanish"><a ng-click="vm.editContent('es')">ES</a></li>
+                                </ul>
+                                <div uib-collapse="vm.openedContent('es')">
+    		                        <pg-details page="vm.page.en" ng-if="vm.page.en && !loading" publish="vm.updatePageContent('en', vm.page.en)"></pg-details>
+                                </div>
+                                <div uib-collapse="vm.openedContent('en')">
+    		                        <pg-details page="vm.page.es" ng-if="vm.page.es && !loading" publish="vm.updatePageContent('es', vm.page.es)"></pg-details>
+                                </div>
 		                    </div>
 		                </div>
 		            </div>

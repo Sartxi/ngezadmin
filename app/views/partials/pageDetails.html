@@ -2,39 +2,32 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 editArea animate-show">
         <div class="row">
             <form name="details">
-                <div class="col-md-12" ng-show="tabs">
-                    <br>
-                    <ul class="nav nav-tabs lngTabs">
-                        <li ng-class="{active: pageEdit === page.en}" uib-tooltip="English"><a ng-click="editLng(page.en)">EN</a></li>
-                        <li ng-class="{active: pageEdit === page.es}" uib-tooltip="Spanish"><a ng-click="editLng(page.es)">ES</a></li>
-                    </ul>
-                </div>
                 <div class="form-group col-lg-4 col-md-6">
                     <label>Page Title</label>
-                    <input type="text" ng-model="pageEdit.title" class="form-control">
+                    <input type="text" ng-model="page.title" class="form-control">
                 </div>
                 <div class="form-group col-lg-4 col-md-6" ng-show="page.url">
                     <label>Page URL</label>
-                    <input type="text" ng-model="pageEdit.url" class="form-control">
+                    <input type="text" ng-model="page.url" class="form-control">
                 </div>
                 <div class="form-group col-lg-4 col-md-6">
                     <label>Meta Description</label>
-                    <input type="text" ng-model="pageEdit.metaDescription" class="form-control">
+                    <input type="text" ng-model="page.metaDescription" class="form-control">
                 </div>
                 <div class="form-group col-lg-4 col-md-6">
                     <label>Meta Key Words</label>
-                    <input type="text" ng-model="pageEdit.metaKeywords" class="form-control">
+                    <input type="text" ng-model="page.metaKeywords" class="form-control">
                 </div>
-                <div class="form-group col-md-12 wysyEdit" ng-show="pageEdit.pageHtml">
+                <div class="form-group col-md-12 wysyEdit" ng-show="page.pageHtml">
                     <label>Page Body</label>
-                    <text-angular ng-model="pageEdit.pageHtml" ng-if="!loading"></text-angular>
+                    <text-angular ng-model="page.pageHtml" ng-if="!loading"></text-angular>
                     <br />
                 </div>
-                <div class="col-xs-12" ng-show="pageEdit.testimonials"><hr></div>
-                <div class="col-lg-6 col-md-12 col-sm-12" ng-show="pageEdit.testimonials">
+                <div class="col-xs-12" ng-show="page.testimonials"><hr></div>
+                <div class="col-lg-6 col-md-12 col-sm-12" ng-show="page.testimonials">
                     <label>Testimonials</label>
                     <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="test in pageEdit.testimonials" ng-init="testEdit = true">
+                        <li class="list-group-item" ng-repeat="test in page.testimonials" ng-init="testEdit = true">
                             <div class="row">
                                 <div class="col-md-12">
                                     <span class="pull-right">

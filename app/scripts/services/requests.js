@@ -25,7 +25,9 @@
         self.getPage = function (id) {
             var defer = $q.defer();
 
-            $http.get(Backand.getApiUrl() + baseUrl + self.name + '/' + id)
+            $http.get(Backand.getApiUrl() + baseUrl + self.name + '/' + id, {
+                params: {deep: true}
+            })
 			.success(function (res) {
 				defer.resolve(res);
 			})
@@ -36,16 +38,18 @@
 			return defer.promise;
         }
 
-        self.getContent = function (id, collection) {
+        self.updateContent = function (name, content) {
             var defer = $q.defer();
 
-            $http.get(Backand.getApiUrl() + baseUrl + self.name + '/' + id + '/' + collection)
-			.success(function (res) {
-				defer.resolve(res);
-			})
-			.error(function (err) {
-				defer.reject(err);
-			});
+            $http({
+                method: 'PUT',
+                url: Backand.getApiUrl() + baseUrl + name + 'Content' + '/' + content.id,
+                data: content
+            }).then(function success(res) {
+                defer.resolve(res);
+            }, function error(err) {
+                defer.reject(err);
+            });
 
 			return defer.promise;
         }

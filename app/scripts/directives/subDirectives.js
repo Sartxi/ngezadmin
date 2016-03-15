@@ -17,18 +17,9 @@ angular.module('ezadmin')
 		scope: {
 			page: '=',
 			tabs: '=',
-			edit: '&'
+			publish: '&'
 		},
-		templateUrl: 'views/partials/pageDetails.html',
-		link: function (scope) {
-			scope.editLng = function (lng) {
-				scope.pageEdit = lng;
-			};
-			function init() {
-				scope.editLng(scope.page.en);
-			}
-			init();
-		}
+		templateUrl: 'views/partials/pageDetails.html'
 	};
 })
 .directive('postListing', function () {

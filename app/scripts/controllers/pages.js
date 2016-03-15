@@ -6,7 +6,7 @@
      * @name ezadmin.controller:PagesCtrl
      * @description
      * # PagesCtrl
-     * Pages controller of the ngezadmin
+     * Pages controllers of the ngezadmin
      */
 
 
@@ -32,19 +32,6 @@
         init();
     }
 
-    angular.module('ezadmin')
-        .controller('PagesCtrl', ['$state', 'request', '$sessionStorage', PagesCtrl]);
-})();
-
-(function() {
-    /**
-     * @ngdoc function
-     * @name ezadmin.controller:PageCtrl
-     * @description
-     * # PagesCtrl
-     * Page controller of the ngezadmin
-     */
-
     function PageCtrl($state, request, $sessionStorage) {
         var self = this;
         var id = $sessionStorage.pageID;
@@ -52,26 +39,43 @@
         function init() {
             request.name = 'pages';
             self.loading = true;
-            console.log('getting there');
+            self.openContent = 'en'; //default english
             getPage();
         }
 
         function getPage() {
             request.getPage(id).then(function (res) {
-                console.log(res.data);
+                self.page = res;
+                self.loading = false;
+            }, function (err) {
+                console.log(err);
+                self.loading = false;
             });
         }
 
-        self.getContent = function (collection) {
-            request.getContent(id, collection).then(function (res) {
-                console.log(res.data);
+        self.editContent = function (lng) {
+            self.openContent = lng;
+        }
+
+        self.openedContent = function (lng) {
+            return self.openContent === lng;
+        }
+
+        self.updatePageContent = function (name, content) {
+            self.loading = true;
+            request.updateContent(name, content).then(function (res) {
+                getPage();
+                self.loading = false;
+            }, function (err) {
+                console.log(err);
+                self.loading = false;
             });
         }
 
         init();
     }
 
-
     angular.module('ezadmin')
+        .controller('PagesCtrl', ['$state', 'request', '$sessionStorage', PagesCtrl])
         .controller('PageCtrl', ['$state', 'request', '$sessionStorage', PageCtrl]);
 })();
