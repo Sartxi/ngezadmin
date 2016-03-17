@@ -15,14 +15,19 @@
 
         function init() {
             request.name = 'pages';
+            self.loading = true;
             getPages();
         }
 
         function getPages() {
-            request.getPages().then(function (res) {
+            request.getObjects().then(function (res) {
+                self.loading = false;
                 self.pages = res.data;
+            }, function (err) {
+                console.log(err);
+                self.loading = false;
             });
-        }// ...set up message when request fails here ^^^^
+        }
 
         self.editPage = function (index) {
             $sessionStorage.pageID = index;
@@ -32,25 +37,31 @@
         init();
     }
 
-    function PageCtrl($state, request, $sessionStorage) {
+    function PageCtrl($state, request, $sessionStorage, $timeout) {
         var self = this;
         var id = $sessionStorage.pageID;
 
         function init() {
             request.name = 'pages';
             self.loading = true;
-            self.openContent = 'en'; //default english
+            self.openContent = 'en';
             getPage();
         }
 
         function getPage() {
-            request.getPage(id).then(function (res) {
+            request.getObject(id).then(function (res) {
                 self.page = res;
                 self.loading = false;
             }, function (err) {
                 console.log(err);
                 self.loading = false;
             });
+        }
+
+        function savedMsg() {
+            $timeout(function() {
+                self.saved = false;
+            }, 1500);
         }
 
         self.editContent = function (lng) {
@@ -64,8 +75,9 @@
         self.updatePageContent = function (name, content) {
             self.loading = true;
             request.updateContent(name, content).then(function (res) {
+                self.saved = true;
+                savedMsg();
                 getPage();
-                self.loading = false;
             }, function (err) {
                 console.log(err);
                 self.loading = false;
@@ -77,5 +89,5 @@
 
     angular.module('ezadmin')
         .controller('PagesCtrl', ['$state', 'request', '$sessionStorage', PagesCtrl])
-        .controller('PageCtrl', ['$state', 'request', '$sessionStorage', PageCtrl]);
+        .controller('PageCtrl', ['$state', 'request', '$sessionStorage', '$timeout', PageCtrl]);
 })();

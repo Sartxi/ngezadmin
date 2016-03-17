@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('ezadmin', [
+    'appFilters',
     'ngResource',
     'ngSanitize',
     'ui.router',
@@ -34,46 +35,46 @@ angular.module('ezadmin', [
         })
         .state('analytics', {
             url: '/analytics',
-            title: 'Analytics',
+            title: 'Snap Admin | Analytics',
             templateUrl: 'views/analytics.html',
             controller: 'AnalyticsCtrl as vm'
         })
         .state('pages', {
             url: '/pages',
-            title: 'Pages',
+            title: 'Snap Admin | Pages',
             templateUrl: 'views/pages.html',
             controller: 'PagesCtrl as vm'
         })
         .state('pages.page', {
             url: '/:id',
-            title: 'Page',
+            title: 'Snap Admin | Page',
             views: {
                 '@': {templateUrl: 'views/pages.page.html'}
             }
         })
         .state('blog', {
             url: '/blog',
-            title: 'Blog',
+            title: 'Snap Admin | Blog',
             templateUrl: 'views/blog.html',
             controller: 'BlogCtrl as vm'
         })
         .state('blog.page', {
             url: '/:id',
-            title: 'Blog Post',
+            title: 'Snap Admin | Blog Post',
             controller: 'PostCtrl as vm',
             views: {
                 '@': {templateUrl: 'views/blog.post.html'}
             }
         })
         .state('lndPages', {
-            url: '/lndpages',
-            title: 'Landing Pages',
+            url: '/landing-pages',
+            title: 'Snap Admin | Landing Pages',
             templateUrl: 'views/lndpages.html',
             controller: 'LndPagesCtrl as vm'
         })
         .state('lndPages.page', {
             url: '/:id',
-            title: 'Landing Page',
+            title: 'Snap Admin | Landing Page',
             controller: 'LndPageCtrl as vm',
             views: {
                 '@': {templateUrl: 'views/lndpages.page.html'}
@@ -81,7 +82,7 @@ angular.module('ezadmin', [
         })
         .state('settings', {
             url: '/setting',
-            title: 'Settings',
+            title: 'Snap Admin | Settings',
             templateUrl: 'views/settings.html',
             controller: 'SettingsCtrl as vm'
         });
@@ -104,8 +105,8 @@ angular.module('ezadmin', [
                         var modalInstance = $uibModal.open({
                             animation: true,
                             size: 'lg',
-                            templateUrl: 'templates/partials/imgGallery.html',
-                            controller: 'imgGalleryCtrl',
+                            templateUrl: 'views/partials/imgGallery.html',
+                            controller: 'ImgGalleryCtrl',
                             windowClass: 'normalModal'
                         });
 
@@ -124,7 +125,7 @@ angular.module('ezadmin', [
                         var modalInstance = $uibModal.open({
                             animation: true,
                             size: 'lg',
-                            templateUrl: 'templates/partials/layoutGallery.html',
+                            templateUrl: 'views/partials/layoutGallery.html',
                             controller: 'layoutGalleryCtrl',
                             windowClass: 'normalModal'
                         });
@@ -148,7 +149,6 @@ angular.module('ezadmin', [
     function ($state, $sessionStorage, $rootScope, $location, ngAnalyticsService)
     {
         ngAnalyticsService.setClientId('971780513833-4h0rjkn5h7iqhkptnfh52s43m03j8574.apps.googleusercontent.com');
-
         $rootScope.$on('$stateChangeSuccess', function (event, toState) {
             $rootScope.pageTitle = toState.title;
         });

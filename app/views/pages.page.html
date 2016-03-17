@@ -1,7 +1,9 @@
 <div id="pagesPage" class="container-fluid" ng-controller="PageCtrl as vm">
     <div class="row">
         <div class="col-md-11 col-md-offset-1">
+
 		    <loader ng-show="vm.loading"></loader>
+
 		    <div class="col-md-11">
 		        <h1 class="mainTitle"><span class="glyphicon glyphicon-file accentText"></span> {{vm.page.name}}</h1>
 		        <hr>
@@ -19,11 +21,14 @@
                                     <li ng-class="{active: vm.openedContent('en')}" uib-tooltip="English"><a ng-click="vm.editContent('en')">EN</a></li>
                                     <li ng-class="{active: vm.openedContent('es')}" uib-tooltip="Spanish"><a ng-click="vm.editContent('es')">ES</a></li>
                                 </ul>
+
+                                <save-msg ng-show="vm.saved"></save-msg>
+
                                 <div uib-collapse="vm.openedContent('es')">
-    		                        <pg-details page="vm.page.en" ng-if="vm.page.en && !loading" publish="vm.updatePageContent('en', vm.page.en)"></pg-details>
+    		                        <pg-details dynamic="true" page="vm.page.en" ng-if="vm.page.en && !loading" publish="vm.updatePageContent('en', vm.page.en)"></pg-details>
                                 </div>
                                 <div uib-collapse="vm.openedContent('en')">
-    		                        <pg-details page="vm.page.es" ng-if="vm.page.es && !loading" publish="vm.updatePageContent('es', vm.page.es)"></pg-details>
+    		                        <pg-details dynamic="false" page="vm.page.es" ng-if="vm.page.es && !loading" publish="vm.updatePageContent('es', vm.page.es)"></pg-details>
                                 </div>
 		                    </div>
 		                </div>

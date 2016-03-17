@@ -1,5 +1,6 @@
 $brand-primary: #666;
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 // Mixins
 @mixin rad ($rad) {
     border-radius: $rad;
@@ -14,7 +15,7 @@ $brand-primary: #666;
 @mixin ts ($ts) {text-shadow: $ts;}
 
 // Variables
-$font: 'Open Sans', sans-serif!important;
+$font: 'Open Sans', sans-serif;
 $solid: #666;
 $accent: #8ec640;
 $dark: #23527c;
@@ -177,13 +178,20 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
     .colMenu {display: none!important;}
     .loading {
         position:absolute;
-        color:$accent;
+        color: $accent;
         background: rgba( white, .8 );
-        right:0;
-        left:0;
-        z-index: 5;
+        right: 0;
+        left: 0;
+        z-index: 9999;
         height: 100%;
-        img {max-width: 80px; position: absolute; margin: 0 auto; left: 0; right: 0; top: 100px;}
+        .uil-hourglass {
+            max-width: 80px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+        }
     }
     .form-group {
         label small {color: #999; font-weight: 400}
@@ -325,6 +333,11 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
     #settings {
         .userIcon {font-size: 31px; background: #eee; padding: 20px; margin: 10px 13px 20px 0; color:$accent; @include rad(50px);}
     }
+    .submitBtn {
+        position: absolute;
+        top: -86px;
+        right: 10px;
+    }
 }
 #imageGallery {
     background: #f7f7f7;
@@ -385,6 +398,37 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
     }
 }
 
+//checkmark animation
+.savedsvg {
+    width: 150px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    text-align: center;
+    color: $accent;
+    background: white;
+    border: 1px solid #f7f7f7;
+    padding: 10px 15px;
+    @include rad(10px);
+    .checkmark {
+        stroke: $accent;
+        stroke-dashoffset: 745.74853515625;
+        stroke-dasharray: 745.74853515625;
+        animation: dash 2s ease-out forwards infinite;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 745.74853515625;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
 // ... Admin Break Points
 @media (max-width: 1400px) {
     #admin {
@@ -402,10 +446,10 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
         .colMenu {display: none;}
         .user{
             position: relative;
-            .userLogo {position: absolute; right: 0; top: 0; max-width: 80px; z-index: 6; background: white; padding: 10px; @include rad(10px);}
+            .userLogo {position: absolute; right: 10px; top: 0; max-width: 80px; z-index: 6; background: white; padding: 10px; @include rad(10px);}
         }
         .adminMenu {
-            background:url('/images/adminMenu.png');
+            background:url('/assets/images/adminMenu.png');
             width: 100%;
             display: block;
             overflow: hidden;

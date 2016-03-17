@@ -5,6 +5,7 @@ angular.module('ezadmin')
 	return {
 		restrict: 'EA',
 		scope: {
+			dynamic: '=',
 			page: '=',
 			edit: '&'
 		},
@@ -15,11 +16,20 @@ angular.module('ezadmin')
 	return {
 		restrict: 'EA',
 		scope: {
+			dynamic: '=',
 			page: '=',
 			tabs: '=',
-			publish: '&'
+			new: '=',
+			publish: '&',
+			delete: '&'
 		},
-		templateUrl: 'views/partials/pageDetails.html'
+		templateUrl: 'views/partials/pageDetails.html',
+		link: function (scope, elem, attrs) {
+			//set form pristine on submit
+			elem.on('submit', function () {
+				scope.details.$setPristine();
+			});
+		}
 	};
 })
 .directive('postListing', function () {
@@ -80,39 +90,6 @@ angular.module('ezadmin')
 					});
 				});
 			};
-			init();
-		}
-	};
-})
-.directive('lndListing', function () {
-	return {
-		restrict: 'EA',
-		scope: {
-			page: '=',
-			edit: '&'
-		},
-		templateUrl: 'views/partials/lndListing.html'
-	};
-})
-.directive('lndDetails', function () {
-	return {
-		restrict: 'EA',
-		scope: {
-			page: '=',
-			tabs: '=',
-			new: '=',
-			publish: '&',
-			delete: '&',
-			getimg: '&'
-		},
-		templateUrl: 'views/partials/lndDetails.html',
-		link: function (scope) {
-			scope.editLng = function (lng) {
-				scope.pageEdit = lng;
-			};
-			function init() {
-				scope.editLng(scope.page.en);
-			}
 			init();
 		}
 	};
