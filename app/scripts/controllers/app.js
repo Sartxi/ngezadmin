@@ -26,6 +26,22 @@
         init();
     }
 
+    function NewPageCtrl($scope, $uibModalInstance) {
+        $scope.openDatePicker = function() {
+            $scope.datePicker = true;
+        };
+        $scope.dateOptions = {
+            showWeeks: false,
+            minDate: moment()
+        };
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+        $scope.ok = function (name) {
+            $uibModalInstance.close(name);
+        };
+    }
+
     function ImgGalleryCtrl($scope, request, $uibModalInstance) {
         var self = this;
 
@@ -140,6 +156,7 @@
 
     angular.module('ezadmin')
         .controller('AppCtrl', ['$rootScope', '$state', 'request', '$sessionStorage', AppCtrl])
+        .controller('NewPageCtrl', ['$scope', '$uibModalInstance', NewPageCtrl])
         .controller('ImgGalleryCtrl', ['$scope', 'request', '$uibModalInstance', ImgGalleryCtrl])
         .controller('layoutGalleryCtrl', ['$scope', '$uibModalInstance', layoutGalleryCtrl]);
 })();

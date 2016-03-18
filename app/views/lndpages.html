@@ -1,13 +1,13 @@
 <div id="landing" class="container-fluid">
     <div class="row">
         <div class="col-md-11 col-md-offset-1">
-            <loader ng-show="loading"></loader>
+            <loader ng-show="vm.loading"></loader>
             <div class="col-md-11">
                 <h1 class="mainTitle"><span class="glyphicon glyphicon-pushpin accentText"></span> Landing Pages</h1>
                 <hr>
             </div>
-            <div class="col-md-11" ng-hide="vm.landingPages.length == 0 || !vm.landingPages">
-                <a ng-click="createPage('Landing Page')"><span class="glyphicon glyphicon-plus"></span> New Page</a>
+            <div class="col-md-11" ng-hide="vm.landingPages.length == 0 && !vm.loading || !vm.landingPages && !vm.loading">
+                <a ng-click="vm.createPage()"><span class="glyphicon glyphicon-plus"></span> New Page</a>
             </div>
             <div class="col-md-11 editingTable">
                 <div class="tableHead">
@@ -16,9 +16,9 @@
                 <div class="editingRow" ng-repeat="page in vm.landingPages">
                     <pg-listing dynamic="true" page="page" edit="vm.editPage(page.id)"></pg-listing>
                 </div>
-                <div ng-show="vm.landingPages.length == 0 || !vm.landingPages">
+                <div ng-show="vm.landingPages.length == 0 && !vm.loading || !vm.landingPages && !vm.loading">
                     <br />
-                    <button type="button" class="btn-panel" ng-click="createPage('Landing Page')"><span class="emtAddBtnIcon glyphicon glyphicon-plus"></span>ADD A PAGE</button>
+                    <button type="button" class="btn-panel" ng-click="vm.createPage()"><span class="emtAddBtnIcon glyphicon glyphicon-plus"></span>ADD A PAGE</button>
                     <hr>
                 </div>
             </div>

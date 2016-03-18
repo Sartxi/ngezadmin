@@ -2,25 +2,12 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 editArea animate-show">
         <div class="row">
             <form name="details" ng-submit="publish()">
-
                 <button type="submit" class="btn btn-success submitBtn animate-show" ng-hide="details.$pristine"><span class="glyphicon glyphicon-floppy-save"></span> Publish Changes</button>
-                <div class="form-group col-md-12" ng-show="dynamic">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="checkbox">
-                                <label><input type="checkbox" ng-model="page.active"> <span ng-show="new">Make </span>Active</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <h4 class="text-right" ng-hide="new"><small>Published:</small><br><span class="accentText">{{page.publishDate | bindDate}}</span></h4>
-                        </div>
-                    </div>
-                </div>
                 <div class="form-group col-lg-4 col-md-6">
                     <label>Page Title</label>
                     <input type="text" ng-model="page.title" class="form-control">
                 </div>
-                <div class="form-group col-lg-4 col-md-6" ng-show="page.url">
+                <div class="form-group col-lg-4 col-md-6">
                     <label>Page URL</label>
                     <input type="text" ng-model="page.url" class="form-control">
                 </div>
@@ -31,10 +18,6 @@
                 <div class="form-group col-lg-4 col-md-6">
                     <label>Meta Key Words</label>
                     <input type="text" ng-model="page.metaKeywords" class="form-control">
-                </div>
-                <div class="form-group col-md-4" ng-show="dynamic && new">
-                    <label>Publish Date <small>mm/dd/yyyy</small></label>
-                    <input type="text" class="form-control" ng-model="page.publishDate" ui-mask="99/99/9999" date />
                 </div>
                 <div class="form-group col-md-12 wysyEdit">
                     <label>Page Body</label>

@@ -1,21 +1,48 @@
-<div id="lndPage" class="container-fluid">
+<div id="lndPage" class="container-fluid" ng-controller="LndPageCtrl as vm">
     <div class="row">
         <div class="col-md-11 col-md-offset-1">
-            <loader ng-show="loading"></loader>
+            <loader ng-show="vm.loading"></loader>
             <div class="col-md-11">
-                <h1 class="mainTitle"><span class="glyphicon glyphicon-pushpin accentText"></span> <span ng-show="newPost">New</span><span ng-hide="newPost">Edit</span> Landing Page</h1>
+                <h1 class="mainTitle"><span class="glyphicon glyphicon-pushpin accentText"></span> {{vm.page.name}}</h1>
+                <p><small><em>Publish Date: <strong>{{vm.page.publishDate | displayWrittenDate}}</strong></em></small></p>
                 <hr>
             </div>
             <div class="col-md-11">
-                <a ui-sref="ezLanding"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a ui-sref="lndPages"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                        <hr class="visible-xs">
+                    </div>
+                    <div class="col-md-8">
+                        <form name="lndPageEdits">
+                            <div class="text-right">
+                                <span>This Page is:</span>&nbsp;
+                                <button type="button" uib-tooltip="Click to Edit" tooltip-placement="left" class="btn btn-xs" ng-class="{'btn-success': vm.page.active, 'btn-default': !vm.page.active}" ng-model="vm.page.active" uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-click="vm.updatePage()"><span ng-show="vm.page.active">Active</span><span ng-show="!vm.page.active">NOT Active</span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="col-md-11 editingTable">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12 panel panel-custom">
                             <div class="panel-body">
-                                <lnd-details page="page" tabs="multilingual" getimg="imgGallery()" new="newPost" publish="publishLndPage()" delete="deleteLndPage()" ng-if="!loading"></lnd-details>
-                            </div>
+                                <br>
+                                <ul class="nav nav-tabs lngTabs">
+                                    <li ng-class="{active: vm.openedContent('en')}" uib-tooltip="English"><a ng-click="vm.editContent('en')">EN</a></li>
+                                    <li ng-class="{active: vm.openedContent('es')}" uib-tooltip="Spanish"><a ng-click="vm.editContent('es')">ES</a></li>
+                                </ul>
+
+                                <save-msg ng-show="vm.saved"></save-msg>
+
+                                <div uib-collapse="vm.openedContent('es')">
+    		                        <pg-details dynamic="true" page="vm.page.en" ng-if="!loading" publish="vm.updatePageContent('en', vm.page.en)" delete="vm.deletePage()"></pg-details>
+                                </div>
+                                <div uib-collapse="vm.openedContent('en')">
+    		                        <pg-details dynamic="true" page="vm.page.es" ng-if="!loading" publish="vm.updatePageContent('es', vm.page.es)" delete="vm.deletePage()"></pg-details>
+                                </div>
+		                    </div>
                         </div>
                     </div>
                 </div>

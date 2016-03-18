@@ -2,11 +2,28 @@
 	<div class="text-right">
 		<a ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
 	</div>
-	<form name="newPageForm" ng-submit="ok(name)">
+	<form name="newPageForm" ng-submit="ok(newPage)">
 		<div class="form-group">
-			<label>{{pageType}} Name:</label>
-			<input type="text" ng-model="name" class="form-control">
+			<label>Page Name:</label>
+			<input type="text" ng-model="newPage.name" class="form-control" required>
 		</div>
-		<button type="submit" class="btn btn-success">Create Page</button>
+		<div class="form-group">
+			<label>Publish Date:</label>
+			<p class="input-group">
+				<input uib-datepicker-popup="MM/dd/yyyy" type="text" class="form-control" ng-model="newPage.publishDate" is-open="datePicker" datepicker-options="dateOptions" show-button-bar="false" ng-required="true" />
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-primary" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+				</span>
+			</p>
+		</div>
+		<div class="form-group">
+			Make this page active:&nbsp;
+			<div class="btn-group">
+				<label class="btn btn-default btn-sm" ng-model="newPage.active" uib-btn-radio="true">Yes</label>
+        		<label class="btn btn-default btn-sm" ng-model="newPage.active" uib-btn-radio="false">No</label>
+			</div>
+		</div>
+		<br />
+		<button type="submit" class="btn btn-success" ng-disabled="newPageForm.$invalid">Create Page</button>
 	</form>
 </div>

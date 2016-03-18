@@ -72,7 +72,7 @@ angular.module('ezadmin', [
             templateUrl: 'views/lndpages.html',
             controller: 'LndPagesCtrl as vm'
         })
-        .state('lndPages.page', {
+        .state('lndPages.lndpage', {
             url: '/:id',
             title: 'Snap Admin | Landing Page',
             controller: 'LndPageCtrl as vm',

@@ -18,7 +18,6 @@ angular.module('ezadmin')
 		scope: {
 			dynamic: '=',
 			page: '=',
-			tabs: '=',
 			new: '=',
 			publish: '&',
 			delete: '&'

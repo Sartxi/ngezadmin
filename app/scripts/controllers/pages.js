@@ -1,6 +1,7 @@
 'use strict';
 
 (function() {
+
     /**
      * @ngdoc function
      * @name ezadmin.controller:PagesCtrl
