@@ -1,40 +1,41 @@
 'use strict';
+
 (function () {
 
-    function AlertService ($rootScope, $timeout) {
+    function GrowlFactory ($rootScope, $timeout) {
 
-		var alertService;
+		var growlFactory;
 
         $rootScope.alerts = [];
 		$rootScope.staticAlerts = [];
 
-        alertService = {
+        growlFactory = {
           	add: function (type, msg, timeout) {
 				$rootScope.alerts = [];
           		if (timeout) {
 		            $timeout(function () {
-		                alertService.closeAlert(this);
+		                growlFactory.closeAlert(this);
 		            }, timeout);
 		        }
             	return $rootScope.alerts.push ({
               		type: type,
               		msg: msg,
               		close: function() {
-                		return alertService.closeAlert(this);
+                		return growlFactory.closeAlert(this);
               		}
             	});
         	},
 			addStatic: function (type, msg, timeout) {
           		if (timeout) {
 		            $timeout(function () {
-		                alertService.closeStaticAlert(this);
+		                growlFactory.closeStaticAlert(this);
 		            }, timeout);
 		        }
             	return $rootScope.staticAlerts.push ({
               		type: type,
               		msg: msg,
               		close: function() {
-                		return alertService.closeStaticAlert(this);
+                		return growlFactory.closeStaticAlert(this);
               		}
             	});
         	},
@@ -52,10 +53,10 @@
 		    }
         };
 
-        return alertService;
+        return growlFactory;
 
     }
 
     angular.module('ezadmin')
-        .factory('growl', ['$rootScope', '$timeout', AlertService]);
+        .factory('growl', ['$rootScope', '$timeout', GrowlFactory]);
 }());

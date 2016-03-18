@@ -1,4 +1,5 @@
 'use strict';
+
 (function () {
 
     function Request($http, $q, Backand) {
@@ -38,12 +39,28 @@
 			return defer.promise;
         }
 
+        self.createContent = function (name, content) {
+            var defer = $q.defer();
+
+            $http({
+                method: 'POST',
+                url: Backand.getApiUrl() + baseUrl + name,
+                data: content
+            }).then(function success(res) {
+                defer.resolve(res);
+            }, function error(err) {
+                defer.reject(err);
+            });
+
+			return defer.promise;
+        }
+
         self.updateContent = function (name, content) {
             var defer = $q.defer();
 
             $http({
                 method: 'PUT',
-                url: Backand.getApiUrl() + baseUrl + name + 'Content' + '/' + content.id,
+                url: Backand.getApiUrl() + baseUrl + name + content.id,
                 data: content
             }).then(function success(res) {
                 defer.resolve(res);

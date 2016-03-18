@@ -44,8 +44,8 @@ a:focus, button:focus {outline:0!important;}
 
 .mainAlerts {
     position: fixed;
-    bottom: 9px;
-    right: 28px;
+    top: 15px;
+    right: 0;
     max-width: 500px;
     min-width: 300px;
     z-index: 999999999;
@@ -402,12 +402,19 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
         background: $accent;
     }
 }
+#pageDatePick {
+    .uib-datepicker-popup {
+        width: 100%;
+        height: 100%;
+        .uib-daypicker {width: 100%;}
+    }
+}
 
 //checkmark animation
 .savedsvg {
     width: 100px;
-    position: absolute;
-    top: 30%;
+    position: fixed;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 9999;

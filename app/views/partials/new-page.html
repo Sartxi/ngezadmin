@@ -4,24 +4,22 @@
 	</div>
 	<form name="newPageForm" ng-submit="ok(newPage)">
 		<div class="form-group">
-			<label>Page Name:</label>
+			<label>Name:</label>
 			<input type="text" ng-model="newPage.name" class="form-control" required>
 		</div>
-		<div class="form-group">
+		<div id="pageDatePick" class="form-group">
 			<label>Publish Date:</label>
-			<p class="input-group">
-				<input uib-datepicker-popup="MM/dd/yyyy" type="text" class="form-control" ng-model="newPage.publishDate" is-open="datePicker" datepicker-options="dateOptions" show-button-bar="false" ng-required="true" />
-				<span class="input-group-btn">
-					<button type="button" class="btn btn-primary" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
-				</span>
-			</p>
+			<input uib-datepicker-popup="MM/dd/yyyy" type="hidden" class="form-control" ng-model="newPage.publishDate" is-open="datePicker" datepicker-options="dateOptions" ng-required="true" />
+
+			<button type="button" class="btn btn-default btn-sm" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i><span ng-hide="newPage.publishDate"> &nbsp;Select a Date</span></button>
+			{{newPage.publishDate | date:'fullDate'}}
 		</div>
 		<div class="form-group">
-			Make this page active:&nbsp;
 			<div class="btn-group">
 				<label class="btn btn-default btn-sm" ng-model="newPage.active" uib-btn-radio="true">Yes</label>
         		<label class="btn btn-default btn-sm" ng-model="newPage.active" uib-btn-radio="false">No</label>
 			</div>
+			&nbsp;Make Active
 		</div>
 		<br />
 		<button type="submit" class="btn btn-success" ng-disabled="newPageForm.$invalid">Create Page</button>

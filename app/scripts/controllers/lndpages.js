@@ -63,7 +63,6 @@
         function init() {
             request.name = 'lndPages';
             self.loading = true;
-            self.openContent = 'en';
             getPage();
         }
 
@@ -71,8 +70,10 @@
             request.getObject(id).then(function (res) {
                 self.page = res;
                 self.loading = false;
+                growl.add('info', res.name + ' --You made it!', 3000);
+                self.editContent('enContent'); //default to English
             }, function (err) {
-                console.log(err);
+                growl.add('danger', err, 3000);
                 self.loading = false;
             });
         }
@@ -85,6 +86,12 @@
 
         self.editContent = function (lng) {
             self.openContent = lng;
+            self.loading = true;
+            request.getObject(id).then(function (res) {
+                self.loading = false;
+                self.page = res;
+                self.content = self.page[lng][0];
+            });
         }
 
         self.openedContent = function (lng) {
@@ -101,24 +108,46 @@
             });
         }
 
-        self.saveContent = function (name, content) {
+        self.saveContent = function (content) {
             self.loading = true;
-            request.updateContent(name, content).then(function (res) {
-                self.saved = true;
-                savedMsg();
-                getPage();
-            }, function (err) {
-                console.log(err);
-                self.loading = false;
-            });
+
+            var name = self.openContent + '/';
+
+            function create () {
+                content.lndPage = self.page.id; //set relationship
+                request.createContent(name, content).then(function (res) {
+                    self.loading = false;
+                    self.saved = true;
+                    savedMsg();
+                    growl.add('success', 'You did it!', 3000);
+                }, function (err) {
+                    console.log(err);
+                    growl.add('danger', err, 3000);
+                    self.loading = false;
+                });
+            }
+            function update () {
+                request.updateContent(name, content).then(function () {
+                    self.loading = false;
+                    self.saved = true;
+                    savedMsg();
+                    growl.add('success', 'You did it!', 3000);
+                }, function (err) {
+                    console.log(err);
+                    growl.add('danger', err, 3000);
+                    self.loading = false;
+                });
+            }
+            if (content.id) {update();} else {create();}
         }
 
         self.deletePage = function () {
             self.loading = true;
             request.delete(id).then(function (res) {
+                growl.add('success', 'Page Successfully Deleted', 3000);
                 $state.go('lndPages');
-            }, function (err) {
-                console.log(err);
+            }, function () {
+                growl.add('danger', 'Page could not be deleted. Please try again later.', 3000);
                 self.loading = false;
             });
         }

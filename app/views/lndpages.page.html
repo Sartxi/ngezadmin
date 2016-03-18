@@ -17,7 +17,7 @@
                         <form name="lndPageEdits">
                             <div class="text-right">
                                 <span>This Page is:</span>&nbsp;
-                                <button type="button" uib-tooltip="Click to Edit" tooltip-placement="left" class="btn btn-xs" ng-class="{'btn-success': vm.page.active, 'btn-default': !vm.page.active}" ng-model="vm.page.active" uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-click="vm.updatePage()"><span ng-show="vm.page.active">Active</span><span ng-show="!vm.page.active">NOT Active</span></button>
+                                <button type="button" uib-tooltip="Click to Edit" tooltip-placement="left" class="btn btn-xs" ng-class="{'btn-success': vm.page.active, 'btn-danger': !vm.page.active}" ng-model="vm.page.active" uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-click="vm.updatePage()"><span ng-show="vm.page.active">Active</span><span ng-show="!vm.page.active">NOT Active</span></button>
                             </div>
                         </form>
                     </div>
@@ -30,18 +30,11 @@
                             <div class="panel-body">
                                 <br>
                                 <ul class="nav nav-tabs lngTabs">
-                                    <li ng-class="{active: vm.openedContent('en')}" uib-tooltip="English"><a ng-click="vm.editContent('en')">EN</a></li>
-                                    <li ng-class="{active: vm.openedContent('es')}" uib-tooltip="Spanish"><a ng-click="vm.editContent('es')">ES</a></li>
+                                    <li ng-class="{active: vm.openedContent('enContent')}" uib-tooltip="English"><a ng-click="vm.editContent('enContent')">EN</a></li>
+                                    <li ng-class="{active: vm.openedContent('esContent')}" uib-tooltip="Spanish"><a ng-click="vm.editContent('esContent')">ES</a></li>
                                 </ul>
-
                                 <save-msg ng-show="vm.saved"></save-msg>
-
-                                <div uib-collapse="vm.openedContent('es')">
-    		                        <pg-details dynamic="true" page="vm.page.en" ng-if="!loading" publish="vm.updatePageContent('en', vm.page.en)" delete="vm.deletePage()"></pg-details>
-                                </div>
-                                <div uib-collapse="vm.openedContent('en')">
-    		                        <pg-details dynamic="true" page="vm.page.es" ng-if="!loading" publish="vm.updatePageContent('es', vm.page.es)" delete="vm.deletePage()"></pg-details>
-                                </div>
+                                <pg-details dynamic="true" page="vm.content" ng-if="!loading" publish="vm.saveContent(vm.content)" delete="vm.deletePage()"></pg-details>
 		                    </div>
                         </div>
                     </div>
