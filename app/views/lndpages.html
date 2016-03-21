@@ -1,26 +1,48 @@
 <div id="landing" class="container-fluid">
     <div class="row">
-        <div class="col-md-11 col-md-offset-1">
+        <div class="col-md-12 pageCol">
             <loader ng-show="vm.loading"></loader>
             <div class="col-md-11">
                 <h1 class="mainTitle"><span class="glyphicon glyphicon-pushpin accentText"></span> Landing Pages</h1>
                 <hr>
             </div>
-            <div class="col-md-11" ng-hide="vm.landingPages.length == 0 && !vm.loading || !vm.landingPages && !vm.loading">
-                <a ng-click="vm.createPage()"><span class="glyphicon glyphicon-plus"></span> New Page</a>
+            <div class="col-md-11">
+                <form name="pageTools" class="form-inline row" ng-init="sortReverse = false">
+                    <div class="col-md-2 col-sm-3" ng-hide="vm.landingPages.length == 0 || !vm.landingPages">
+                        <a class="btn btn-default btn-block" ng-click="vm.createPage()"><span class="glyphicon glyphicon-plus"></span> New Page</a>
+                        <br class="visible-xs" ng-hide="vm.landingPages.length <= 10" />
+                    </div>
+                    <div class="col-md-4 col-sm-4" ng-hide="vm.landingPages.length <= 10">
+                        <input class="form-control input-block" ng-model="pagesFilter" placeholder="Filter Landing Pages">
+                        <br class="visible-xs" />
+                    </div>
+                    <div class="col-md-6 col-sm-5" ng-hide="vm.landingPages.length <= 10">
+                        <div class="btn-group pull-right">
+                            <label class="btn btn-success" ng-model="sortReverse" uib-btn-radio="false">New</label>
+                            <label class="btn btn-success" ng-model="sortReverse" uib-btn-radio="true">Old</label>
+                        </div>
+                        <br class="visible-xs" />
+                    </div>
+                </form>
             </div>
-            <div class="col-md-11 editingTable">
+            <div class="col-md-11 editingTable" ng-show="vm.landingPages.length !== 0">
                 <div class="tableHead">
-                    <div class="col-md-12">Page</div>
+                    <div class="col-md-6 col-sm-6">
+                        <i ng-hide="vm.landingPages.length <= 10" ng-click="sortType = 'name'; sortReverse = !sortReverse" class="sorter fa" ng-class="{'fa-chevron-circle-up': !sortReverse, 'fa-chevron-circle-down': sortReverse}"></i> Page
+                    </div>
+                    <div class="col-md-6 col-sm-6 text-right hidden-xs">
+                        <i ng-hide="vm.landingPages.length <= 10" ng-click="sortType = 'active'; sortReverse = !sortReverse" class="sorter fa" ng-class="{'fa-chevron-circle-up': !sortReverse, 'fa-chevron-circle-down': sortReverse}"></i> Status
+                    </div>
                 </div>
-                <div class="editingRow" ng-repeat="page in vm.landingPages">
+                <div class="well well-sm" ng-show="(vm.landingPages | filter: pagesFilter).length == 0">Sorry, no results for <strong class="accentText">{{pagesFilter}}</strong></div>
+                <div class="editingRow" dir-paginate="page in vm.landingPages | filter: pagesFilter | orderBy: sortType:!sortReverse | itemsPerPage: 10">
                     <pg-listing dynamic="true" page="page" edit="vm.editPage(page.id)"></pg-listing>
                 </div>
-                <div ng-show="vm.landingPages.length == 0 && !vm.loading || !vm.landingPages && !vm.loading">
-                    <br />
-                    <button type="button" class="btn-panel" ng-click="vm.createPage()"><span class="emtAddBtnIcon glyphicon glyphicon-plus"></span>ADD A PAGE</button>
-                    <hr>
-                </div>
+                <dir-pagination-controls></dir-pagination-controls>
+            </div>
+            <div class="col-md-11 editingTable" ng-show="vm.landingPages.length == 0 || !vm.landingPages">
+                <button type="button" class="btn-panel" ng-click="vm.createPage()"><span class="emtAddBtnIcon glyphicon glyphicon-plus"></span>ADD A PAGE</button>
+                <hr>
             </div>
         </div>
     </div>

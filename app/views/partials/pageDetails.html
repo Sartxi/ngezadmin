@@ -23,39 +23,9 @@
                     <label>Page Body</label>
                     <text-angular ng-model="page.pageHtml" ng-if="!loading"></text-angular>
                 </div>
-                <div class="col-xs-12" ng-show="page.testimonials"><hr></div>
-                <div class="col-lg-6 col-md-12 col-sm-12" ng-show="page.testimonials">
-                    <label>Testimonials</label>
-                    <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="test in page.testimonials" ng-init="testEdit = true">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <span class="pull-right">
-                                        <a ng-click="testEdit = !testEdit" uib-tooltip="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
-                                        <a class="text-danger" uib-tooltip="Delete"><span class="glyphicon glyphicon-remove"></span></a>
-                                    </span>
-                                    {{test.author}}
-                                </div>
-                                <div class="col-md-12 testEditArea" uib-collapse="testEdit">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Testimonial</label>
-                                            <textarea type="text" class="form-control" ng-model="test.text" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Author</label>
-                                            <input type="text" class="form-control" ng-model="test.author">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-success animate-show pull-right" ng-hide="details.$pristine"><span class="glyphicon glyphicon-floppy-save"></span> Publish Changes</button>
                     <button type="button" ng-click="delete()" class="btn btn-default btn-xs" ng-show="dynamic">Delete Page</button>
-                    <br /><br />
                 </div>
             </form>
         </div>

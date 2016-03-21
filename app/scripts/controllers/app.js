@@ -14,13 +14,21 @@
         var self = this;
 
         function init() {
-            request.name = 'pages';
+            request.name = 'users';
             $rootScope.multilingual = true; //use settings when available
         }
 
         self.logout = function () {
             request.logout();
             $state.go('login');
+        }
+
+        $rootScope.toggleMenuLs = function () {
+            if ($rootScope.menuLs) {
+                $rootScope.menuLs = false;
+            } else {
+                $rootScope.menuLs = true;
+            }
         }
 
         init();

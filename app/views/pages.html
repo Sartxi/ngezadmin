@@ -1,18 +1,37 @@
 <div id="pages" class="container-fluid">
     <div class="row">
-        <div class="col-md-11 col-md-offset-1">
+        <div class="col-md-12 pageCol">
             <loader ng-show="vm.loading"></loader>
             <div class="col-md-11">
                 <h1 class="mainTitle"><span class="glyphicon glyphicon-file accentText"></span> Pages</h1>
                 <hr>
             </div>
+            <div class="col-md-11" ng-hide="vm.pages.length <= 10">
+                <form name="pageTools" class="row" ng-init="sortReverse = false">
+                    <div class="col-md-6 col-sm-6">
+                        <input class="form-control input-block" ng-model="pagesFilter" placeholder="Filter Pages">
+                        <br class="visible-xs" />
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="btn-group pull-right">
+                            <label class="btn btn-success" ng-model="sortReverse" uib-btn-radio="false">New</label>
+                            <label class="btn btn-success" ng-model="sortReverse" uib-btn-radio="true">Old</label>
+                        </div>
+                        <br class="visible-xs" />
+                    </div>
+                </form>
+            </div>
             <div class="col-md-11 editingTable">
                 <div class="tableHead">
-                    <div class="col-md-12">Page</div>
+                    <div class="col-md-12">
+                        <i ng-hide="vm.pages.length <= 10" ng-click="sortType = 'name'; sortReverse = !sortReverse" class="sorter fa" ng-class="{'fa-chevron-circle-up': !sortReverse, 'fa-chevron-circle-down': sortReverse}"></i> Page
+                    </div>
                 </div>
-                <div class="editingRow" ng-repeat="page in vm.pages" ng-class="{'subPage': page.subPage}">
-                    <pg-listing page="page" edit="vm.editPage(page.id)"></pg-listing>
+                <div class="well well-sm" ng-show="(vm.pages | filter: pagesFilter).length == 0">Sorry, no results for <strong class="accentText">{{pagesFilter}}</strong></div>
+                <div class="editingRow" dir-paginate="page in vm.pages | filter: pagesFilter | orderBy: sortType:sortReverse | itemsPerPage: 10" ng-class="{'subPage': page.subPage}">
+                    <pg-listing page="page" pages="true" edit="vm.editPage(page.id)"></pg-listing>
                 </div>
+                <dir-pagination-controls></dir-pagination-controls>
             </div>
         </div>
     </div>

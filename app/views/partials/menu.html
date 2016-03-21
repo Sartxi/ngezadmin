@@ -1,14 +1,12 @@
 <div class="adminMenu">
-    <ul class="list-unstyled">
-        <li class="text-center"><a ui-sref="analytics" ui-sref-active="active"><span class="glyphicon glyphicon-paperclip"></span><br><span class="menuItemText">Analyze</span></a></li>
-		<li class="text-center"><a ui-sref="pages" ui-sref-active="active"><span class="glyphicon glyphicon-file"></span><br><span class="menuItemText">Pages</span></a></li>
-        <li class="text-center"><a ui-sref="lndPages" ui-sref-active="active"><span class="glyphicon glyphicon-pushpin"></span><br><span class="menuItemText">Landing</span></a></li>
-        <li class="text-center"><a ui-sref="blog" ui-sref-active="active"><span class="glyphicon glyphicon-link"></span><br><span class="menuItemText">Blog</span></a></li>
-        <li class="text-center"><a ui-sref="settings" ui-sref-active="active"><span class="glyphicon glyphicon-cog"></span><br><span class="menuItemText">Settings</span></a></li>
+    <ul class="list-unstyled menuItems">
+        <li><a ui-sref="analytics" ui-sref-active="active"><span class="glyphicon glyphicon-paperclip"></span><br><span class="menuItemText">Analyze</span></a></li>
+		<li><a ui-sref="pages" ui-sref-active="active"><span class="glyphicon glyphicon-file"></span><br><span class="menuItemText">Pages</span></a></li>
+        <li><a ui-sref="lndPages" ui-sref-active="active"><span class="glyphicon glyphicon-pushpin"></span><br><span class="menuItemText">Landing</span></a></li>
+        <li><a ui-sref="blog" ui-sref-active="active"><span class="glyphicon fa fa-rss"></span><br><span class="menuItemText">Blog</span></a></li>
+        <li><a ui-sref="settings" ui-sref-active="active"><span class="glyphicon glyphicon-cog"></span><br><span class="menuItemText">Settings</span></a></li>
     </ul>
-
-    <div class="user">
-        <img src="assets/images/userLogo.png" class="userLogo" />
-        <!-- <img src="assets/images/snapadmin.png" class="userLogo" /> -->
+    <div class="menuToggle">
+        <i ng-click="toggleMenuLs()" ng-class="{'fa fa-toggle-off': menuLs, 'fa fa-toggle-on': !menuLs}"></i>
     </div>
 </div>

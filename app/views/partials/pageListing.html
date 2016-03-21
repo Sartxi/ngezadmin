@@ -1,5 +1,8 @@
 <div class="row">
-    <div class="col-md-12">
-        <p><span class="fa fa-level-down subPageIcon" tooltip-placement="left" uib-tooltip="Sub-Page" ng-show="page.subPage"></span> <a ng-click="edit()"><span class="glyphicon glyphicon-pencil"></span></a> {{page.name}}</p>
+    <div class="col-md-6 col-sm-6">
+        <p><span class="fa fa-level-down subPageIcon" tooltip-placement="top" uib-tooltip="Parent: {{page.parent}}" ng-show="page.subPage"></span> <a ng-click="edit()"><span class="glyphicon glyphicon-pencil"></span></a> {{page.name}}</p>
+    </div>
+    <div class="col-md-6 col-sm-6 text-right hidden-xs">
+        <p ng-hide="pages"><span ng-show="page.active" class="accentText">Active</span><span ng-show="!page.active" class="text-danger">Not Active</span></p>
     </div>
 </div>

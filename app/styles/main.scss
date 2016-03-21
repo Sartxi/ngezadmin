@@ -33,6 +33,7 @@ body {font-family: $font;-webkit-backface-visibility: hidden;}
 header {background: $solid;}
 a, .pagination, .carousel, .panel-title a {cursor: pointer; color: $accent; &:hover {color: darken($accent, 20%);}}
 a:focus, button:focus {outline:0!important;}
+.sorter {cursor: pointer;}
 .btn-primary {
     background-color: $solid;
     border-color: darken($solid, 5%);
@@ -41,7 +42,7 @@ a:focus, button:focus {outline:0!important;}
 .btn-success { background-color:$accent;}
 .btn-success.active, .btn-success:active, .open>.dropdown-toggle.btn-success {background-color: darken($accent, 8%); border-color: darken($accent, 10%);}
 .btn-mega {padding: 10px 22px!important}
-
+.input-block {width: 100%!important;}
 .mainAlerts {
     position: fixed;
     top: 15px;
@@ -54,7 +55,7 @@ a:focus, button:focus {outline:0!important;}
 
 // ... Bootstrap CSS Customizations
 .btn, .well, .form-control { @include rad(2px);}
-.btn-default {background: #eee; border: #eee;}
+.btn-default {background-color: #eee; border-color: #eee;}
 .badge {background-color:$solid;}
 .btn-panel {
     background: white;
@@ -137,6 +138,13 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
 }
 .pagination > li > a, .pagination > li > span {color: $accent}
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {background: $accent; border-color: darken($accent, 10%);}
+
+.uib-datepicker-popup, .uib-datepicker {
+    width: 100%;
+    height: 100%;
+}
+.uib-daypicker, .uib-monthpicker, .uib-yearpicker {width: 100%;}
+.uib-day button, .uib-month button, .uib-year button {background-color: white;}
 .uib-day button, .uib-month button, .uib-year button, .uib-daypicker .btn, .uib-monthpicker .btn, .uib-yearpicker .btn, .uib-datepicker-popup li .uib-datepicker .uib-daypicker:focus {outline: 0!important; border: 0!important;}
 .uib-daypicker .text-info {color: $accent;}
 .uib-daypicker .btn-info {background: $accent;}
@@ -178,13 +186,65 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
 // ... Admin Specific
 #admin {
     margin-bottom: 400px;
-    .mainTitle {margin-top: 33px;}
-    .menuToggle {display: none;}
-    .colMenu {display: none!important;}
+    #menu {
+        width: 100px;
+        height: 100%;
+        position: fixed;
+        background:url('../assets/images/adminMenu.png');
+        border: 0;
+        border-right: 2px solid #222;
+        .menuToggle {
+            position: absolute;
+            bottom: 2px;
+            left: 10px;
+            color: white;
+            cursor: pointer;
+            font-size: 25px;
+            &:hover {color: $accent;}
+        }
+        &.ls {
+            width: 50px;
+            ul.menuItems li a {
+                .menuItemText {display: none;}
+                .glyphicon {font-size: 22px!important;}
+                .fa {font-size: 26px!important;}
+            }
+        }
+        &.adminMenu {
+            z-index: 6;
+            ul.menuItems {
+                li {text-align: center;
+                    a {
+                        display: block;
+                        width: 100%;
+                        padding: 15px 0;
+                        border-bottom: 1px solid #222;
+                        color: white;
+                        .glyphicon {font-size: 33px;}
+                        .fa {font-size: 37px;}
+                        &.active {background: #222; border-right: 5px solid $accent; text-decoration: none;}
+                        &:hover {color: white; cursor: pointer; background: #222; text-decoration: none}
+                    }
+                }
+            }
+        }
+    }
+    #content {
+        margin-left: 110px;
+        display: block;
+        &.ls {
+            margin-left: 57px;
+            ul.menuItems li a .menuItemText {display: none;}
+        }
+    }
+    #userInfo {
+        position: relative;
+        .userLogo {position: fixed; right: 20px; top: 20px; max-width: 100px; z-index: 6; background: white; @include rad(8px); padding: 5px;}
+    }
     .loading {
         position:absolute;
         color: $accent;
-        background: rgba( white, .8 );
+        background: white;
         right: 0;
         left: 0;
         z-index: 9999;
@@ -212,31 +272,11 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
         background-color: rgba(225, 225, 225, .8);
         &:focus {border: 0; outline: 0;}
     }
-    .user {
+    .staticDatePicker {
         position: relative;
-        .userLogo {position: fixed; right: 20px; top: 20px; max-width: 100px; z-index: 6; background: white}
-    }
-    .adminMenu {
-        background:url('../assets/images/adminMenu.png');
-        height: 100%;
-        display: block;
-        position: fixed;
-        width: 100px;
-        border-right:2px solid #222;
-        z-index: 6;
-        ul {
-            li {
-                a {
-                    display: block;
-                    width: 100%;
-                    padding: 15px 0;
-                    border-bottom:1px solid #222;
-                    color: white;
-                    .glyphicon {font-size: 33px;}
-                    &.active {background: #222; border-right: 5px solid $accent; text-decoration: none;}
-                    &:hover {color: white; cursor: pointer; background: #222; text-decoration: none}
-                }
-            }
+        .popover {
+            position: absolute;
+            display: block;
         }
     }
     .editMode p {color: #999;}
@@ -320,6 +360,8 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
     }
     .subPage {
         background: #f7f7f7;
+        padding: 10px 10px 0!important;
+        p {margin-bottom: 10px!important;}
         .subPageIcon {color: darken(#ddd, 10%); margin-right: 10px;}
     }
     .moduleLabels {font-size: 16px; margin-left: 20px;}
@@ -402,13 +444,6 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
         background: $accent;
     }
 }
-#pageDatePick {
-    .uib-datepicker-popup {
-        width: 100%;
-        height: 100%;
-        .uib-daypicker {width: 100%;}
-    }
-}
 
 //checkmark animation
 .savedsvg {
@@ -443,55 +478,67 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
 
 // ... Admin Break Points
 @media (max-width: 1400px) {
+
+}
+@media (max-width: 1252px) {
+    #admin #userInfo .userLogo {position: absolute; max-width: 80px;}
+}
+@media (max-width: 800px) {
+    .pageCol {padding-left: 0; padding-right: 0;}
     #admin {
-        .menuToggle {
-            font-size: 40px;
-            padding: 0 10px;
-            background: #eee;
-            position: relative;
-            top: 0;
-            left: 0;
-            z-index: 999;
-            display: inline-block;
-            &:hover {cursor: pointer; color: darken($accent, 15%);}
-        }
-        .colMenu {display: none;}
-        .user{
-            position: relative;
-            .userLogo {position: absolute; right: 10px; top: 0; max-width: 80px; z-index: 6; background: white; padding: 10px; @include rad(10px);}
-        }
-        .adminMenu {
-            background:url('/assets/images/adminMenu.png');
+        #menu {
+            position: static;
             width: 100%;
             display: block;
-            overflow: hidden;
-            position: relative;
-            border-bottom:2px solid #222;
-            border-right: 0;
-            ul {
-                li {
-                    float: left;
-                    display: inline;
-                    font-size: 11px;
-                    a {
-                        display: block;
-                        padding: 15px 15px 8px;
-                        border: 0;
-                        color: white;
-                        .glyphicon {font-size: 20px;}
-                        &.active {background: #222; border-bottom: 5px solid $accent; border-right: 0; &:hover {border-bottom: 5px solid $accent;}}
-                        &:hover {color: white; cursor: pointer; background: #222; border-bottom: 5px solid #222; text-decoration: none}
+            float: left;
+            border: 0;
+            border-bottom: 2px solid #222;
+            .menuToggle {display: none;}
+            &.adminMenu {
+                ul.menuItems {
+                    margin-bottom: 0;
+                    li {
+                        display: inline;
+                        float: left;
+                        border-right: 1px solid #222;
+                        a {
+                            border: 0;
+                            border-bottom: 5px solid #999;
+                            padding: 10px 13px 6px;
+                            .glyphicon {font-size: 22px;}
+                            .fa {font-size: 26px!important;}
+                            .menuItemText {display: none;}
+                            &.active {border:0; border-bottom: 5px solid $accent;}
+                        }
                     }
                 }
+            }
+            &.ls {width: 100%;}
+        }
+        #content {
+            margin-left: 0;
+            display: block;
+            float: left;
+            width: 100%;
+            &.ls {
+                margin-left: 0;
+                display: block;
+                float: left;
+                width: 100%;
+            }
+        }
+        #userInfo {
+            position: relative;
+            .userLogo {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                max-width: 75px;
+                @include bs(-2px 2px 5px 0px rgba(0,0,0,0.44));
             }
         }
     }
 }
 @media (max-width: 700px) {
-    #admin {
-        .adminMenu ul li {
-            font-size: 11px;
-            a {.menuItemText {display: none;}}
-        }
-    }
+
 }

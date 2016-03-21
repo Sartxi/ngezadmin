@@ -1,10 +1,20 @@
 <div id="lndPage" class="container-fluid" ng-controller="LndPageCtrl as vm">
     <div class="row">
-        <div class="col-md-11 col-md-offset-1">
+        <div class="col-md-12 pageCol">
             <loader ng-show="vm.loading"></loader>
             <div class="col-md-11">
                 <h1 class="mainTitle"><span class="glyphicon glyphicon-pushpin accentText"></span> {{vm.page.name}}</h1>
-                <p><small><em>Publish Date: <strong>{{vm.page.publishDate | displayWrittenDate}}</strong></em></small></p>
+                <p><small><em>Published: <strong>{{vm.page.publishDate | date:'longDate'}}</strong></em> <a ng-click="vm.dateSelector = !vm.dateSelector"><i class="fa fa-pencil-square-o"></i></a></small></p>
+
+                <div id="staticDatePick" class="staticDatePicker" ng-hide="!vm.dateSelector">
+                    <div class="popover bottom">
+                        <div class="arrow"></div>
+                        <div class="popover-content">
+                            <uib-datepicker ng-model="vm.page.publishDate" datepicker-options="vm.staticDateOptions"></uib-datepicker>
+                        </div>
+                    </div>
+                </div>
+
                 <hr>
             </div>
             <div class="col-md-11">

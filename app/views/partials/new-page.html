@@ -9,7 +9,7 @@
 		</div>
 		<div id="pageDatePick" class="form-group">
 			<label>Publish Date:</label>
-			<input uib-datepicker-popup="MM/dd/yyyy" type="hidden" class="form-control" ng-model="newPage.publishDate" is-open="datePicker" datepicker-options="dateOptions" ng-required="true" />
+			<input uib-datepicker-popup type="hidden" class="form-control" ng-model="newPage.publishDate" is-open="datePicker" datepicker-options="dateOptions" ng-required="true" />
 
 			<button type="button" class="btn btn-default btn-sm" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i><span ng-hide="newPage.publishDate"> &nbsp;Select a Date</span></button>
 			{{newPage.publishDate | date:'fullDate'}}

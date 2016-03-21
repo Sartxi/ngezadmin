@@ -1,61 +1,51 @@
 <div id="blog" class="container-fluid">
     <div class="row">
-        <div class="col-md-11 col-md-offset-1">
-            <loader ng-show="loading"></loader>
+        <div class="col-md-12 pageCol">
+            <loader ng-show="vm.loading"></loader>
             <div class="col-md-11">
-                <h1 class="mainTitle"><span class="glyphicon glyphicon-link accentText"></span> Blog</h1>
+                <h1 class="mainTitle"><i class="fa fa-rss accentText"></i> Blog</h1>
                 <hr>
             </div>
-            <div class="col-md-11" ng-hide="blogPosts.length == 0">
-                <a ng-click="createPage('Blog Post')"><span class="glyphicon glyphicon-plus"></span> Add Post</a>
-            </div>
-            <div class="col-md-11 editingTable">
-                <div class="row">
-                    <div class="col-lg-9 col-md-8 col-sm-7">
-                        <div class="tableHead">
-                            <div class="col-md-5 col-sm-6 col-xs-12">Post Title</div>
-                            <div class="col-md-4 hidden-sm hidden-xs">URL</div>
-                            <div class="col-md-3 col-sm-6 hidden-xs text-right">Date Published</div>
-                        </div>
-                        <div class="editingRow" dir-paginate="post in blogPosts | orderBy:'-id' | itemsPerPage: 15">
-                            <post-listing class="wysyEdit" post="post" edit="blogPost(post.id)"></post-listing>
-                        </div>
-                        <dir-pagination-controls></dir-pagination-controls>
-                        <div ng-show="blogPosts.length == 0">
-                            <br />
-                            <button type="button" class="btn-panel" ng-click="createPage('Blog Post')"><span class="emtAddBtnIcon glyphicon glyphicon-plus"></span>ADD A POST</button>
-                            <hr>
-                        </div>
+            <div class="col-md-11">
+                <form name="pageTools" class="form-inline row" ng-init="sortReverse = false">
+                    <div class="col-md-2 col-sm-3" ng-hide="vm.blogPosts.length == 0 || !vm.blogPosts">
+                        <a class="btn btn-default btn-block" ng-click="vm.createPage()"><span class="glyphicon glyphicon-plus"></span> New Post</a>
+                        <br class="visible-xs" ng-hide="vm.blogPosts.length <= 10" />
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-5">
-                        <div class="panel panel-default panel-custom" ng-hide="!blogCategories">
-                            <div class="panel-heading clickHeading" ng-click="colCat = !colCat">
-                                <a class="pull-right"><i class="fa" ng-class="{'fa-caret-square-o-up':colCat,'fa-caret-square-o-down':!colCat}" uib-tooltip="View All"></i></a>
-                                <span class="glyphicon glyphicon-bookmark solidText hidden-xs"></span> Categories
-                            </div>
-                            <ul class="nav nav-pills nav-justified blogLngPills" ng-show="multilingual" uib-collapse="!colCat">
-                                <li ng-class="{active: blogCategories === engCats}"><a ng-click="blogCategories = engCats">English</a></li>
-                                <li ng-class="{active: blogCategories === espCats}"><a ng-click="blogCategories = espCats">Spanish</a></li>
-                            </ul>
-                            <ul class="list-unstyled panelist" uib-collapse="!colCat">
-                                <li ng-repeat="category in blogCategories">{{category.text}}</li>
-                            </ul>
+                    <div class="col-md-4 col-sm-4" ng-hide="vm.blogPosts.length <= 10">
+                        <input class="form-control input-block" ng-model="pagesFilter" placeholder="Filter Posts">
+                        <br class="visible-xs" />
+                    </div>
+                    <div class="col-md-6 col-sm-5" ng-hide="vm.blogPosts.length <= 10">
+                        <div class="btn-group pull-right">
+                            <label class="btn btn-default" ng-model="sortReverse" uib-btn-radio="false">New</label>
+                            <label class="btn btn-default" ng-model="sortReverse" uib-btn-radio="true">Old</label>
                         </div>
-                        <div class="panel panel-default panel-custom" ng-hide="!blogTags">
-                            <div class="panel-heading clickHeading" ng-click="colTab = !colTab">
-                                <a class="pull-right"><i class="fa" ng-class="{'fa-caret-square-o-up':colTab,'fa-caret-square-o-down':!colTab}" uib-tooltip="View All"></i></a>
-                                <span class="glyphicon glyphicon-tags solidText hidden-xs"></span> Tags
-                            </div>
-                            <ul class="nav nav-pills nav-justified blogLngPills" ng-show="multilingual" uib-collapse="!colTab">
-                                <li ng-class="{active: blogTags === engTags}"><a ng-click="blogTags = engTags">English</a></li>
-                                <li ng-class="{active: blogTags === espTags}"><a ng-click="blogTags = espTags">Spanish</a></li>
-                            </ul>
-                            <ul class="list-unstyled panelist" uib-collapse="!colTab">
-                                <li ng-repeat="tag in blogTags">{{tag.text}}</li>
-                            </ul>
-                        </div>
+                        <br class="visible-xs" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-11 editingTable" ng-show="vm.blogPosts.length !== 0">
+                <div class="tableHead">
+                    <div class="col-md-4 col-sm-6">
+                        <i ng-hide="vm.blogPosts.length <= 10" ng-click="sortType = 'name'; sortReverse = !sortReverse" class="sorter fa" ng-class="{'fa-chevron-circle-up': !sortReverse, 'fa-chevron-circle-down': sortReverse}"></i> Post
+                    </div>
+                    <div class="col-md-4 hidden-sm hidden-xs">
+                        <i ng-hide="vm.blogPosts.length <= 10" ng-click="sortType = 'name'; sortReverse = !sortReverse" class="sorter fa" ng-class="{'fa-chevron-circle-up': !sortReverse, 'fa-chevron-circle-down': sortReverse}"></i> Published
+                    </div>
+                    <div class="col-md-4 col-sm-6 text-right hidden-xs">
+                        <i ng-hide="vm.blogPosts.length <= 10" ng-click="sortType = 'active'; sortReverse = !sortReverse" class="sorter fa" ng-class="{'fa-chevron-circle-up': !sortReverse, 'fa-chevron-circle-down': sortReverse}"></i> Status
                     </div>
                 </div>
+                <div class="well well-sm" ng-show="(vm.blogPosts | filter: pagesFilter).length == 0">Sorry, no results for <strong class="accentText">{{pagesFilter}}</strong></div>
+                <div class="editingRow" dir-paginate="page in vm.blogPosts | filter: pagesFilter | orderBy: sortType:!sortReverse | itemsPerPage: 10">
+                    <post-listing dynamic="true" page="page" edit="vm.editPage(page.id)"></post-listing>
+                </div>
+                <dir-pagination-controls></dir-pagination-controls>
+            </div>
+            <div class="col-md-11 editingTable" ng-show="vm.blogPosts.length == 0 || !vm.blogPosts">
+                <button type="button" class="btn-panel" ng-click="vm.createPage()"><span class="emtAddBtnIcon glyphicon glyphicon-plus"></span>ADD A PAGE</button>
+                <hr>
             </div>
         </div>
     </div>

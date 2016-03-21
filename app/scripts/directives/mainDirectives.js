@@ -9,6 +9,27 @@ angular.module('ezadmin')
     };
 })
 
+.directive('user', function () {
+    return {
+        restrict: 'A',
+        templateUrl: 'views/partials/user.html'
+    };
+})
+
+.directive('alerts', function () {
+    return {
+        restrict: 'A',
+        templateUrl: 'views/partials/alerts.html'
+    };
+})
+
+.directive('browser', function () {
+    return {
+        restrict: 'A',
+        templateUrl: 'views/partials/browser.html'
+    };
+})
+
 .directive('loader', function () {
     return {
         restrict: 'EA',

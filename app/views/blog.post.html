@@ -1,21 +1,51 @@
-<div id="blogPost" class="container-fluid">
+<div id="blogPost" class="container-fluid" ng-controller="PostCtrl as vm">
     <div class="row">
-        <div class="col-md-11 col-md-offset-1">
-            <loader ng-show="loading"></loader>
+        <div class="col-md-12 pageCol">
+            <loader ng-show="vm.loading"></loader>
             <div class="col-md-11">
-                <h1 class="mainTitle"><span class="glyphicon glyphicon-link accentText"></span> <span ng-show="newPost">New</span><span ng-hide="newPost">Edit</span> Blog Post</h1>
+                <h1 class="mainTitle"><span class="glyphicon glyphicon-pushpin accentText"></span> {{vm.page.name}}</h1>
+                <p><small><em>Published: <strong>{{vm.page.publishDate | date:'longDate'}}</strong></em> <a ng-click="vm.dateSelector = !vm.dateSelector"><i class="fa fa-pencil-square-o"></i></a></small></p>
+
+                <div id="staticDatePick" class="staticDatePicker" ng-hide="!vm.dateSelector">
+                    <div class="popover bottom">
+                        <div class="arrow"></div>
+                        <div class="popover-content">
+                            <uib-datepicker ng-model="vm.page.publishDate" datepicker-options="vm.staticDateOptions"></uib-datepicker>
+                        </div>
+                    </div>
+                </div>
+
                 <hr>
             </div>
             <div class="col-md-11">
-                <a ui-sref="ezBlog"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a ui-sref="blog"><span class="glyphicon glyphicon-chevron-left"></span> Back</a>
+                        <hr class="visible-xs">
+                    </div>
+                    <div class="col-md-8">
+                        <form name="lndPageEdits">
+                            <div class="text-right">
+                                <span>This Post is:</span>&nbsp;
+                                <button type="button" uib-tooltip="Click to Edit" tooltip-placement="left" class="btn btn-xs" ng-class="{'btn-success': vm.page.active, 'btn-danger': !vm.page.active}" ng-model="vm.page.active" uib-btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false" ng-click="vm.updatePage()"><span ng-show="vm.page.active">Active</span><span ng-show="!vm.page.active">NOT Active</span></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="col-md-11 editingTable">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="col-md-12 panel panel-custom">
                             <div class="panel-body">
-                                <post-details post="blogPost" tabs="multilingual" new="newPost" publish="publishPost()" delete="deletePost()" ng-if="!loading"></post-details>
-                            </div>
+                                <br>
+                                <ul class="nav nav-tabs lngTabs">
+                                    <li ng-class="{active: vm.openedContent('enContent')}" uib-tooltip="English"><a ng-click="vm.editContent('enContent')">EN</a></li>
+                                    <li ng-class="{active: vm.openedContent('esContent')}" uib-tooltip="Spanish"><a ng-click="vm.editContent('esContent')">ES</a></li>
+                                </ul>
+                                <save-msg ng-show="vm.saved"></save-msg>
+                                <post-details dynamic="true" page="vm.content" ng-if="!loading" publish="vm.saveContent(vm.content)" delete="vm.deletePage()"></post-details>
+		                    </div>
                         </div>
                     </div>
                 </div>

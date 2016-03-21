@@ -7,7 +7,8 @@ angular.module('ezadmin')
 		scope: {
 			dynamic: '=',
 			page: '=',
-			edit: '&'
+			edit: '&',
+			pages: '='
 		},
 		templateUrl: 'views/partials/pageListing.html'
 	};
@@ -18,7 +19,6 @@ angular.module('ezadmin')
 		scope: {
 			dynamic: '=',
 			page: '=',
-			new: '=',
 			publish: '&',
 			delete: '&'
 		},
@@ -35,7 +35,7 @@ angular.module('ezadmin')
 	return {
 		restrict: 'EA',
 		scope: {
-			post: '=',
+			page: '=',
 			edit: '&'
 		},
 		templateUrl: 'views/partials/postListing.html'
@@ -45,24 +45,12 @@ angular.module('ezadmin')
 	return {
 		restrict: 'EA',
 		scope: {
-			post: '=',
-			tabs: '=',
-			new: '=',
+			page: '=',
 			publish: '&',
 			delete: '&'
 		},
 		templateUrl: 'views/partials/postDetails.html',
 		link: function (scope) {
-			function init() {
-				scope.editLng(scope.post.en);
-				scope.setEN(true);
-			}
-			scope.editLng = function (lng) {
-				scope.pageEdit = lng;
-			};
-			scope.setEN = function (lng) {
-				scope.english = lng;
-			};
 			scope.queryCats = function (query) {
 				return request.fetchCategories().then(function (res) {
 					var cats = [];
@@ -89,7 +77,6 @@ angular.module('ezadmin')
 					});
 				});
 			};
-			init();
 		}
 	};
 });

@@ -38,14 +38,13 @@
         init();
     }
 
-    function PageCtrl($state, request, $sessionStorage, $timeout) {
+    function PageCtrl($state, request, $sessionStorage, $timeout, growl) {
         var self = this;
         var id = $sessionStorage.pageID;
 
         function init() {
             request.name = 'pages';
             self.loading = true;
-            self.openContent = 'en';
             getPage();
         }
 
@@ -53,8 +52,9 @@
             request.getObject(id).then(function (res) {
                 self.page = res;
                 self.loading = false;
+                self.editContent('enContent'); //default to English
             }, function (err) {
-                console.log(err);
+                growl.add('danger', err, 3000);
                 self.loading = false;
             });
         }
@@ -67,22 +67,49 @@
 
         self.editContent = function (lng) {
             self.openContent = lng;
+            self.loading = true;
+            request.getObject(id).then(function (res) {
+                self.loading = false;
+                self.page = res;
+                self.content = self.page[lng][0];
+            });
         }
 
         self.openedContent = function (lng) {
             return self.openContent === lng;
         }
 
-        self.updatePageContent = function (name, content) {
+        self.saveContent = function (content) {
             self.loading = true;
-            request.updateContent(name, content).then(function (res) {
-                self.saved = true;
-                savedMsg();
-                getPage();
-            }, function (err) {
-                console.log(err);
-                self.loading = false;
-            });
+
+            var name = self.openContent + '/';
+
+            function create () {
+                content.page = self.page.id; //set relationship
+                request.createContent(name, content).then(function (res) {
+                    self.loading = false;
+                    self.saved = true;
+                    savedMsg();
+                    growl.add('success', 'You did it!', 3000);
+                }, function (err) {
+                    console.log(err);
+                    growl.add('danger', err, 3000);
+                    self.loading = false;
+                });
+            }
+            function update () {
+                request.updateContent(name, content).then(function () {
+                    self.loading = false;
+                    self.saved = true;
+                    savedMsg();
+                    growl.add('success', 'You did it!', 3000);
+                }, function (err) {
+                    console.log(err);
+                    growl.add('danger', err, 3000);
+                    self.loading = false;
+                });
+            }
+            if (content.id) {update();} else {create();}
         }
 
         init();
@@ -90,5 +117,5 @@
 
     angular.module('ezadmin')
         .controller('PagesCtrl', ['$state', 'request', '$sessionStorage', PagesCtrl])
-        .controller('PageCtrl', ['$state', 'request', '$sessionStorage', '$timeout', PageCtrl]);
+        .controller('PageCtrl', ['$state', 'request', '$sessionStorage', '$timeout', 'growl', PageCtrl]);
 })();

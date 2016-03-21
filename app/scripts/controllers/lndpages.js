@@ -10,7 +10,7 @@
      */
 
 
-    function LndPagesCtrl($state, request, $sessionStorage, $uibModal) {
+    function LndPagesCtrl($state, request, $sessionStorage, $uibModal, growl) {
         var self = this;
 
         function init() {
@@ -43,7 +43,7 @@
                 request.create(page).then(function (res) {
                     self.editPage(res.id);
                 }, function (err) {
-                    console.log(err.message);
+                    growl.add('danger', 'Could not create page', 3000);
                 });
             });
         };
@@ -56,7 +56,7 @@
         init();
     }
 
-    function LndPageCtrl($state, request, $sessionStorage, $timeout, growl) {
+    function LndPageCtrl($scope, $state, request, $sessionStorage, $timeout, growl) {
         var self = this;
         var id = $sessionStorage.lndID;
 
@@ -66,12 +66,25 @@
             getPage();
         }
 
+        function watchDate() {
+            $scope.$watch(function() {
+                return self.page.publishDate;
+            }, function(newDate, oldDate) {
+                if (newDate !== oldDate) {
+                    self.updatePage();
+                    self.dateSelector = false;
+                }
+            });
+        }
+
+        self.staticDateOptions = {showWeeks: false, minDate: moment()}
+
         function getPage() {
             request.getObject(id).then(function (res) {
                 self.page = res;
                 self.loading = false;
-                growl.add('info', res.name + ' --You made it!', 3000);
-                self.editContent('enContent'); //default to English
+                self.editContent('enContent');
+                watchDate();
             }, function (err) {
                 growl.add('danger', err, 3000);
                 self.loading = false;
@@ -157,6 +170,6 @@
 
 
     angular.module('ezadmin')
-        .controller('LndPagesCtrl', ['$state', 'request', '$sessionStorage', '$uibModal', LndPagesCtrl])
-        .controller('LndPageCtrl', ['$state', 'request', '$sessionStorage', '$timeout', 'growl', LndPageCtrl]);
+        .controller('LndPagesCtrl', ['$state', 'request', '$sessionStorage', '$uibModal', 'growl', LndPagesCtrl])
+        .controller('LndPageCtrl', ['$scope', '$state', 'request', '$sessionStorage', '$timeout', 'growl', LndPageCtrl]);
 })();

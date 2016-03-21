@@ -8,6 +8,7 @@ angular.module('ezadmin', [
     'ui.sortable',
     'ui.interceptors',
     'ui.utils',
+    'angularUtils.directives.dirPagination',
     'ui.bootstrap',
     'backand',
     'ngStorage',
@@ -35,32 +36,32 @@ angular.module('ezadmin', [
         })
         .state('analytics', {
             url: '/analytics',
-            title: 'Snap Admin | Analytics',
+            title: 'EZ Admin | Analytics',
             templateUrl: 'views/analytics.html',
             controller: 'AnalyticsCtrl as vm'
         })
         .state('pages', {
             url: '/pages',
-            title: 'Snap Admin | Pages',
+            title: 'EZ Admin | Pages',
             templateUrl: 'views/pages.html',
             controller: 'PagesCtrl as vm'
         })
         .state('pages.page', {
             url: '/:id',
-            title: 'Snap Admin | Page',
+            title: 'EZ Admin | Page',
             views: {
                 '@': {templateUrl: 'views/pages.page.html'}
             }
         })
         .state('blog', {
             url: '/blog',
-            title: 'Snap Admin | Blog',
+            title: 'EZ Admin | Blog',
             templateUrl: 'views/blog.html',
             controller: 'BlogCtrl as vm'
         })
-        .state('blog.page', {
+        .state('blog.post', {
             url: '/:id',
-            title: 'Snap Admin | Blog Post',
+            title: 'EZ Admin | Blog Post',
             controller: 'PostCtrl as vm',
             views: {
                 '@': {templateUrl: 'views/blog.post.html'}
@@ -68,13 +69,13 @@ angular.module('ezadmin', [
         })
         .state('lndPages', {
             url: '/landing-pages',
-            title: 'Snap Admin | Landing Pages',
+            title: 'EZ Admin | Landing Pages',
             templateUrl: 'views/lndpages.html',
             controller: 'LndPagesCtrl as vm'
         })
         .state('lndPages.lndpage', {
             url: '/:id',
-            title: 'Snap Admin | Landing Page',
+            title: 'EZ Admin | Landing Page',
             controller: 'LndPageCtrl as vm',
             views: {
                 '@': {templateUrl: 'views/lndpages.page.html'}
@@ -145,12 +146,13 @@ angular.module('ezadmin', [
         ]);
     }
 ])
-.run(['$state', '$sessionStorage', '$rootScope', '$location', 'ngAnalyticsService',
-    function ($state, $sessionStorage, $rootScope, $location, ngAnalyticsService)
+.run(['$state', '$sessionStorage', '$rootScope', '$location', 'ngAnalyticsService', '$anchorScroll',
+    function ($state, $sessionStorage, $rootScope, $location, ngAnalyticsService, $anchorScroll)
     {
         ngAnalyticsService.setClientId('971780513833-4h0rjkn5h7iqhkptnfh52s43m03j8574.apps.googleusercontent.com');
         $rootScope.$on('$stateChangeSuccess', function (event, toState) {
             $rootScope.pageTitle = toState.title;
+            $anchorScroll();
         });
     }
 ]);
