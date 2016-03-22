@@ -38,7 +38,7 @@
         init();
     }
 
-    function PageCtrl($state, request, $sessionStorage, $timeout, growl) {
+    function PageCtrl($state, request, $sessionStorage, $timeout, growl, savePage) {
         var self = this;
         var id = $sessionStorage.pageID;
 
@@ -49,6 +49,7 @@
         }
 
         function getPage() {
+            request.name = 'pages';
             request.getObject(id).then(function (res) {
                 self.page = res;
                 self.loading = false;
@@ -81,35 +82,21 @@
 
         self.saveContent = function (data) {
             self.loading = true;
-
-            function create () {
-                request.name = self.openContent;
-                data.page = self.page.id; //set relationship
-                request.create(data).then(function (res) {
-                    self.loading = false;
-                    self.saved = true;
-                    savedMsg();
-                    growl.add('success', 'You did it!', 3000);
-                }, function (err) {
-                    console.log(err);
-                    growl.add('danger', err, 3000);
-                    self.loading = false;
-                });
+            var params = {
+                name: self.openContent,
+                type: 'page',
+                pageId: self.page.id
             }
-            function update () {
-                request.name = self.openContent;
-                request.update(data.id, data).then(function () {
-                    self.loading = false;
-                    self.saved = true;
-                    savedMsg();
-                    growl.add('success', 'You did it!', 3000);
-                }, function (err) {
-                    console.log(err);
-                    growl.add('danger', err, 3000);
-                    self.loading = false;
-                });
-            }
-            if (data.id) {update();} else {create();}
+            savePage.save(data, params).then(function (res) {
+                self.saved = true;
+                savedMsg();
+                getPage();
+                growl.add('success', 'You did it!', 3000);
+            }, function (err) {
+                console.log(err);
+                growl.add('danger', 'Unable to Save Post. Contact Admin.', 3000);
+                self.loading = false;
+            });
         }
 
         init();
@@ -117,5 +104,5 @@
 
     angular.module('ezadmin')
         .controller('PagesCtrl', ['$state', 'request', '$sessionStorage', PagesCtrl])
-        .controller('PageCtrl', ['$state', 'request', '$sessionStorage', '$timeout', 'growl', PageCtrl]);
+        .controller('PageCtrl', ['$state', 'request', '$sessionStorage', '$timeout', 'growl', 'savePage', PageCtrl]);
 })();

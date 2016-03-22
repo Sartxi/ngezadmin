@@ -44,7 +44,7 @@
                                     <li ng-class="{active: vm.openedContent('esContent')}" uib-tooltip="Spanish"><a ng-click="vm.editContent('esContent')">ES</a></li>
                                 </ul>
                                 <save-msg ng-show="vm.saved"></save-msg>
-                                <post-details dynamic="true" page="vm.content" ng-if="!loading" publish="vm.saveContent(vm.content)" delete="vm.deletePage()"></post-details>
+                                <post-details page="vm.content" orgs="vm.orgs" ng-if="!loading" publish="vm.saveContent(vm.content, vm.orgs)" delete="vm.deletePage()"></post-details>
 		                    </div>
                         </div>
                     </div>

@@ -56,7 +56,7 @@
         init();
     }
 
-    function LndPageCtrl($scope, $state, request, $sessionStorage, $timeout, growl) {
+    function LndPageCtrl($scope, $state, request, $sessionStorage, $timeout, growl, savePage) {
         var self = this;
         var id = $sessionStorage.lndID;
 
@@ -80,6 +80,7 @@
         self.staticDateOptions = {showWeeks: false, minDate: moment()}
 
         function getPage() {
+            request.name = 'lndPages';
             request.getObject(id).then(function (res) {
                 self.page = res;
                 self.loading = false;
@@ -123,35 +124,21 @@
 
         self.saveContent = function (data) {
             self.loading = true;
-
-            function create () {
-                request.name = self.openContent;
-                data.lndPage = self.page.id; //set relationship
-                request.create(data).then(function (res) {
-                    self.loading = false;
-                    self.saved = true;
-                    savedMsg();
-                    growl.add('success', 'You did it!', 3000);
-                }, function (err) {
-                    console.log(err);
-                    growl.add('danger', err, 3000);
-                    self.loading = false;
-                });
+            var params = {
+                name: self.openContent,
+                type: 'lndPage',
+                pageId: self.page.id
             }
-            function update () {
-                request.name = self.openContent;
-                request.update(data.id, data).then(function () {
-                    self.loading = false;
-                    self.saved = true;
-                    savedMsg();
-                    growl.add('success', 'You did it!', 3000);
-                }, function (err) {
-                    console.log(err);
-                    growl.add('danger', err, 3000);
-                    self.loading = false;
-                });
-            }
-            if (data.id) {update();} else {create();}
+            savePage.save(data, params).then(function (res) {
+                self.saved = true;
+                savedMsg();
+                getPage();
+                growl.add('success', 'You did it!', 3000);
+            }, function (err) {
+                console.log(err);
+                growl.add('danger', 'Unable to Save Post. Contact Admin.', 3000);
+                self.loading = false;
+            });
         }
 
         self.deletePage = function () {
@@ -171,5 +158,5 @@
 
     angular.module('ezadmin')
         .controller('LndPagesCtrl', ['$state', 'request', '$sessionStorage', '$uibModal', 'growl', LndPagesCtrl])
-        .controller('LndPageCtrl', ['$scope', '$state', 'request', '$sessionStorage', '$timeout', 'growl', LndPageCtrl]);
+        .controller('LndPageCtrl', ['$scope', '$state', 'request', '$sessionStorage', '$timeout', 'growl', 'savePage', LndPageCtrl]);
 })();

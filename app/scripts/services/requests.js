@@ -56,7 +56,10 @@
             return $http({
                 method: 'PUT',
                 url : Backand.getApiUrl() + baseUrl + self.name + '/' + id,
-                data: data
+                data: data,
+                params: {
+                    returnObject: true
+                }
             }).then(function(response) {
                 return response.data;
             });

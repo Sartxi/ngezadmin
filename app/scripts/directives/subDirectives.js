@@ -46,11 +46,15 @@ angular.module('ezadmin')
 		restrict: 'EA',
 		scope: {
 			page: '=',
+			orgs: '=',
 			publish: '&',
 			delete: '&'
 		},
 		templateUrl: 'views/partials/postDetails.html',
-		link: function (scope) {
+		link: function (scope, elem, attrs) {
+			elem.on('submit', function () {
+				scope.details.$setPristine();
+			});
 			scope.queryCats = function (query) {
 				request.name = 'blogCatagories';
 				return request.getObjects().then(function (res) {
@@ -69,21 +73,36 @@ angular.module('ezadmin')
 					});
 				});
 			};
-			function createTag(tag, obj) {
-				request.name = obj;
-				request.create(tag);
+			//creates tags/catagories
+			function createTag(newTag, name) {
+				request.name = name;
+				request.create(newTag);
 			}
-			scope.checkIt = function (tag, obj) {
-				request.name = obj;
+			scope.exists = function (newTag, name) {
+				request.name = name;
 				request.getObjects().then(function (res) {
 					var tags = res.data;
-					return tags.filter(function (tg) {
-						if (tg.text.toLowerCase().indexOf(tag.text.toLowerCase()) == -1) {
-							createTag(tag, obj);
-						}
-					});
+					var existingTag = function () {
+						var result = false;
+						var nt = newTag.text.toLowerCase();
+						angular.forEach(tags, function(tag) {
+							if (tag.text.toLowerCase().indexOf(nt) > -1) {
+								result = true;
+							}
+						});
+						return result;
+					}
+					// if tag doesnt exist create one
+					if (!existingTag()) {
+						createTag(newTag, name);
+					}
 				});
 			};
+			scope.deleteOrgs = function (id, name) {
+				request.name = name;
+				request.delete(id);
+				scope.publish();
+			}
 		}
 	};
 });

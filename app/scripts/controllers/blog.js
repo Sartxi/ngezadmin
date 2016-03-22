@@ -61,7 +61,6 @@
         var id = $sessionStorage.postID;
 
         function init() {
-            request.name = 'blog';
             self.loading = true;
             getPage();
         }
@@ -80,6 +79,7 @@
         self.staticDateOptions = {showWeeks: false, minDate: moment()}
 
         function getPage() {
+            request.name = 'blog';
             request.getObject(id).then(function (res) {
                 self.page = res;
                 self.loading = false;
@@ -100,6 +100,7 @@
         self.editContent = function (lng) {
             self.openContent = lng;
             self.loading = true;
+            request.name = 'blog';
             request.getObject(id).then(function (res) {
                 self.loading = false;
                 self.page = res;
@@ -121,20 +122,24 @@
             });
         }
 
-        self.saveContent = function (data) {
+        self.saveContent = function (data, orgs) {
             self.loading = true;
-
-            savePage.savePost(data, self.openContent).then(function (res) {
-                self.loading = false;
+            var params = {
+                name: self.openContent,
+                type: 'post',
+                pageId: self.page.id
+            }
+            savePage.save(data, params, orgs).then(function (res) {
                 self.saved = true;
                 savedMsg();
+                getPage();
+                delete self.orgs;
                 growl.add('success', 'You did it!', 3000);
             }, function (err) {
                 console.log(err);
-                growl.add('danger', err, 3000);
+                growl.add('danger', 'Unable to Save Post. Contact Admin.', 3000);
                 self.loading = false;
             });
-
         }
 
         self.deletePage = function () {
