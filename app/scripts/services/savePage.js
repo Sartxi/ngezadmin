@@ -80,7 +80,7 @@
             }
 
             //check if post exists and act accordingly
-            if (data.hasOwnProperty('id')) {
+            if (data && data.hasOwnProperty('id')) {
                 updateContent();
             } else {
                 createContent();

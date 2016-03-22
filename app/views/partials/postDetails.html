@@ -23,7 +23,7 @@
                     <label>Post Body</label>
                     <text-angular ng-model="page.pageHtml" ng-if="!loading"></text-angular>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 animate-show" ng-hide="!page.title">
                     <label>Catagories</label>
                     <tags-input ng-model="orgs.catagories" placeholder="Add a Category" add-on-paste="true" replace-spaces-with-dashes="false" on-tag-added="exists($tag, 'blogCatagories')">
                         <auto-complete
@@ -35,7 +35,7 @@
                     </tags-input>
                     <span class="label label-success orgsLabel" ng-repeat="cat in page.catagories">{{cat.text}} <a ng-click="deleteOrgs(cat.id, 'postCatagories')"><span class="glyphicon glyphicon-remove"></span></a></span>
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-6 animate-show" ng-hide="!page.title">
                     <label>Tags</label>
                     <tags-input ng-model="orgs.tags" placeholder="Add a Tag" add-on-paste="true" replace-spaces-with-dashes="false" on-tag-added="exists($tag, 'blogTags')">
                         <auto-complete
