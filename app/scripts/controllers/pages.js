@@ -79,14 +79,13 @@
             return self.openContent === lng;
         }
 
-        self.saveContent = function (content) {
+        self.saveContent = function (data) {
             self.loading = true;
 
-            var name = self.openContent + '/';
-
             function create () {
-                content.page = self.page.id; //set relationship
-                request.createContent(name, content).then(function (res) {
+                request.name = self.openContent;
+                data.page = self.page.id; //set relationship
+                request.create(data).then(function (res) {
                     self.loading = false;
                     self.saved = true;
                     savedMsg();
@@ -98,7 +97,8 @@
                 });
             }
             function update () {
-                request.updateContent(name, content).then(function () {
+                request.name = self.openContent;
+                request.update(data.id, data).then(function () {
                     self.loading = false;
                     self.saved = true;
                     savedMsg();
@@ -109,7 +109,7 @@
                     self.loading = false;
                 });
             }
-            if (content.id) {update();} else {create();}
+            if (data.id) {update();} else {create();}
         }
 
         init();

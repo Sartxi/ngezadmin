@@ -52,28 +52,35 @@ angular.module('ezadmin')
 		templateUrl: 'views/partials/postDetails.html',
 		link: function (scope) {
 			scope.queryCats = function (query) {
-				return request.fetchCategories().then(function (res) {
-					var cats = [];
-					if (!scope.english) {
-						cats = res.categories.es;
-					} else {
-						cats = res.categories.en;
-					}
+				request.name = 'blogCatagories';
+				return request.getObjects().then(function (res) {
+					var cats = res.data;
 					return cats.filter(function (cat) {
 						return cat.text.toLowerCase().indexOf(query.toLowerCase()) !== -1;
 					});
 				});
 			};
 			scope.queryTags = function (query) {
-				return request.fetchTags().then(function (res) {
-					var tags = [];
-					if (!scope.english) {
-						tags = res.blogTags.es;
-					} else {
-						tags = res.blogTags.en;
-					}
+				request.name = 'blogTags';
+				return request.getObjects().then(function (res) {
+					var tags = res.data;
 					return tags.filter(function (tag) {
 						return tag.text.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+					});
+				});
+			};
+			function createTag(tag, obj) {
+				request.name = obj;
+				request.create(tag);
+			}
+			scope.checkIt = function (tag, obj) {
+				request.name = obj;
+				request.getObjects().then(function (res) {
+					var tags = res.data;
+					return tags.filter(function (tg) {
+						if (tg.text.toLowerCase().indexOf(tag.text.toLowerCase()) == -1) {
+							createTag(tag, obj);
+						}
 					});
 				});
 			};

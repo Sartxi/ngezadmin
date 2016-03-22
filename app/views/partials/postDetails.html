@@ -23,6 +23,29 @@
                     <label>Post Body</label>
                     <text-angular ng-model="page.pageHtml" ng-if="!loading"></text-angular>
                 </div>
+                <div class="form-group col-md-6">
+                    <label>Catagories</label>
+                    <tags-input ng-model="page.catagories" placeholder="Add a Category" add-on-paste="true" replace-spaces-with-dashes="false" on-tag-added="checkIt($tag, 'blogCatagories')">
+                        <auto-complete
+                            source="queryCats($query)"
+                            max-results-to-show="32"
+                            load-on-focus="true"
+                            load-on-empty="true">
+                        </auto-complete>
+                    </tags-input>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Tags</label>
+                    <tags-input ng-model="page.tags" placeholder="Add a Tag" add-on-paste="true" replace-spaces-with-dashes="false" on-tag-added="checkIt($tag, 'blogTags')">
+                        <auto-complete
+                            source="queryTags($query)"
+                            max-results-to-show="32"
+                            load-on-focus="true"
+                            load-on-empty="true"
+                            onTagAdded="checkIt($tag, 'blogTags')">
+                        </auto-complete>
+                    </tags-input>
+                </div>
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-success animate-show pull-right" ng-hide="details.$pristine"><span class="glyphicon glyphicon-floppy-save"></span> Publish Changes</button>
                     <button type="button" ng-click="delete()" class="btn btn-default btn-xs">Delete Post</button>

@@ -56,7 +56,7 @@
         init();
     }
 
-    function PostCtrl($scope, $state, request, $sessionStorage, $timeout, growl) {
+    function PostCtrl($scope, $state, request, $sessionStorage, $timeout, growl, savePage) {
         var self = this;
         var id = $sessionStorage.postID;
 
@@ -121,37 +121,20 @@
             });
         }
 
-        self.saveContent = function (content) {
+        self.saveContent = function (data) {
             self.loading = true;
 
-            var name = self.openContent + '/';
+            savePage.savePost(data, self.openContent).then(function (res) {
+                self.loading = false;
+                self.saved = true;
+                savedMsg();
+                growl.add('success', 'You did it!', 3000);
+            }, function (err) {
+                console.log(err);
+                growl.add('danger', err, 3000);
+                self.loading = false;
+            });
 
-            function create () {
-                content.post = self.page.id; //set relationship
-                request.createContent(name, content).then(function (res) {
-                    self.loading = false;
-                    self.saved = true;
-                    savedMsg();
-                    growl.add('success', 'You did it!', 3000);
-                }, function (err) {
-                    console.log(err);
-                    growl.add('danger', err, 3000);
-                    self.loading = false;
-                });
-            }
-            function update () {
-                request.updateContent(name, content).then(function () {
-                    self.loading = false;
-                    self.saved = true;
-                    savedMsg();
-                    growl.add('success', 'You did it!', 3000);
-                }, function (err) {
-                    console.log(err);
-                    growl.add('danger', err, 3000);
-                    self.loading = false;
-                });
-            }
-            if (content.id) {update();} else {create();}
         }
 
         self.deletePage = function () {
@@ -171,5 +154,5 @@
 
     angular.module('ezadmin')
         .controller('BlogCtrl', ['$state', 'request', '$sessionStorage', '$uibModal', 'growl', BlogCtrl])
-        .controller('PostCtrl', ['$scope', '$state', 'request', '$sessionStorage', '$timeout', 'growl', PostCtrl]);
+        .controller('PostCtrl', ['$scope', '$state', 'request', '$sessionStorage', '$timeout', 'growl', 'savePage', PostCtrl]);
 })();
