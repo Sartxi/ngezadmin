@@ -14,11 +14,20 @@
         var self = this;
 
         function init() {
-            request.name = 'users';
+            settings();
             $rootScope.multilingual = true; //use settings when available
         }
 
+        function settings() {
+            var id = 1; //only one record necassary
+            request.name = 'settings';
+            request.getObject(id).then(function (res) {
+                $rootScope.settings = res;
+            });
+        }
+
         self.logout = function () {
+            request.name = 'users';
             request.logout();
             $state.go('login');
         }
@@ -35,6 +44,11 @@
     }
 
     function NewPageCtrl($scope, $uibModalInstance) {
+        function init() {
+            $scope.newPage = {
+                active: false
+            }
+        }
         $scope.openDatePicker = function() {
             $scope.datePicker = true;
         };
@@ -48,6 +62,7 @@
         $scope.ok = function (name) {
             $uibModalInstance.close(name);
         };
+        init();
     }
 
     function ImgGalleryCtrl($scope, request, $uibModalInstance) {

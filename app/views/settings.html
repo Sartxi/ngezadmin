@@ -25,32 +25,32 @@
                         <form name="modulesForm" class="row">
                             <div class="col-md-12">
                                 <div class="btn-group">
-                                    <label class="btn btn-primary btn-sm" ng-model="settings.landing" uib-btn-radio="true">ON</label>
-                                    <label class="btn btn-primary btn-sm" ng-model="settings.landing" uib-btn-radio="false">OFF</label>
+                                    <label class="btn btn-default btn-sm" ng-model="vm.settings.landing" uib-btn-radio="true">ON</label>
+                                    <label class="btn btn-default btn-sm" ng-model="vm.settings.landing" uib-btn-radio="false">OFF</label>
                                 </div>
                                 <span class="moduleLabels">Landing Pages</span>
                             </div>
                             <div class="col-md-12"><br /><br /></div>
                             <div class="col-md-12">
                                 <div class="btn-group">
-                                    <label class="btn btn-primary btn-sm" ng-model="settings.blog" uib-btn-radio="true">ON</label>
-                                    <label class="btn btn-primary btn-sm" ng-model="settings.blog" uib-btn-radio="false">OFF</label>
+                                    <label class="btn btn-default btn-sm" ng-model="vm.settings.blog" uib-btn-radio="true">ON</label>
+                                    <label class="btn btn-default btn-sm" ng-model="vm.settings.blog" uib-btn-radio="false">OFF</label>
                                 </div>
                                 <span class="moduleLabels">Blog Pages</span>
                             </div>
                             <div class="col-md-12"><br /><br /></div>
                             <div class="col-md-12">
                                 <div class="btn-group">
-                                    <label class="btn btn-primary btn-sm" ng-model="settings.analytics" uib-btn-radio="true">ON</label>
-                                    <label class="btn btn-primary btn-sm" ng-model="settings.analytics" uib-btn-radio="false">OFF</label>
+                                    <label class="btn btn-default btn-sm" ng-model="vm.settings.analytics" uib-btn-radio="true">ON</label>
+                                    <label class="btn btn-default btn-sm" ng-model="vm.settings.analytics" uib-btn-radio="false">OFF</label>
                                 </div>
                                 <span class="moduleLabels">Site Analytics</span>
                             </div>
                             <div class="col-md-12"><br /><br /></div>
                             <div class="col-md-12">
                                 <div class="btn-group">
-                                    <label class="btn btn-primary btn-sm" ng-model="settings.spanish" uib-btn-radio="true">ON</label>
-                                    <label class="btn btn-primary btn-sm" ng-model="settings.spanish" uib-btn-radio="false">OFF</label>
+                                    <label class="btn btn-default btn-sm" ng-model="vm.settings.spanish" uib-btn-radio="true">ON</label>
+                                    <label class="btn btn-default btn-sm" ng-model="vm.settings.spanish" uib-btn-radio="false">OFF</label>
                                 </div>
                                 <span class="moduleLabels">Spanish Website</span>
                             </div>
@@ -60,23 +60,6 @@
                             </div>
                         </form>
                         <br /><br />
-                    </div>
-                    <div class="col-md-5">
-                        <h3>Google Analytics</h3>
-                        <br />
-                        <form name="googleNumbers">
-                            <div class="form-group">
-                                <label>Client ID</label>
-                                <input type="text" ng-model="settings.googleClientID" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>View ID</label>
-                                <input type="text" ng-model="settings.googleViewID" class="form-control">
-                            </div>
-                            <div class="form-group" ng-show="googleNumbers.$dirty">
-                                <button type="button" class="btn btn-success">Submit Changes</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
             </div>

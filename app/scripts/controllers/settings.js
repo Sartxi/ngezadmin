@@ -14,7 +14,15 @@
         var self = this;
 
         function init() {
-            request.name = 'pages';
+            request.name = 'settings';
+            getSettings();
+        }
+
+        function getSettings() {
+            var id = 1;
+            request.getObject(1).then(function (res) {
+                self.settings = res;
+            });
         }
 
         init();
