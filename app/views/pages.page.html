@@ -15,7 +15,7 @@
 		                <div class="col-md-12 panel panel-custom">
 		                    <div class="panel-body">
                                 <br>
-                                <ul class="nav nav-tabs lngTabs">
+                                <ul class="nav nav-tabs lngTabs" ng-show="settings.spanish">
                                     <li ng-class="{active: vm.openedContent('enContent')}" uib-tooltip="English"><a ng-click="vm.editContent('enContent')">EN</a></li>
                                     <li ng-class="{active: vm.openedContent('esContent')}" uib-tooltip="Spanish"><a ng-click="vm.editContent('esContent')">ES</a></li>
                                 </ul>

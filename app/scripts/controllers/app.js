@@ -10,19 +10,31 @@
      */
 
 
-    function AppCtrl($rootScope, $state, request, $sessionStorage) {
+    function AppCtrl($rootScope, $state, request, $sessionStorage, $window) {
         var self = this;
 
         function init() {
             settings();
-            $rootScope.multilingual = true; //use settings when available
+            userSettings();
         }
 
         function settings() {
-            var id = 1; //only one record necassary
+            var id = 1;
             request.name = 'settings';
             request.getObject(id).then(function (res) {
                 $rootScope.settings = res;
+            });
+        }
+
+        function userSettings() {
+            var user = [];
+            var userInfo = $window.localStorage.BACKANDuser;
+            user.push(angular.fromJson(userInfo));
+            var id = user[0].userId;
+            request.name = 'users';
+            request.getObject(id).then(function (res) {
+                $rootScope.userSettings = res.settings[0];
+                $rootScope.lsMenu = $rootScope.userSettings.lsMenu;
             });
         }
 
@@ -33,10 +45,10 @@
         }
 
         $rootScope.toggleMenuLs = function () {
-            if ($rootScope.menuLs) {
-                $rootScope.menuLs = false;
+            if ($rootScope.lsMenu) {
+                $rootScope.lsMenu = false;
             } else {
-                $rootScope.menuLs = true;
+                $rootScope.lsMenu = true;
             }
         }
 
@@ -178,7 +190,7 @@
     }
 
     angular.module('ezadmin')
-        .controller('AppCtrl', ['$rootScope', '$state', 'request', '$sessionStorage', AppCtrl])
+        .controller('AppCtrl', ['$rootScope', '$state', 'request', '$sessionStorage', '$window', AppCtrl])
         .controller('NewPageCtrl', ['$scope', '$uibModalInstance', NewPageCtrl])
         .controller('ImgGalleryCtrl', ['$scope', 'request', '$uibModalInstance', ImgGalleryCtrl])
         .controller('layoutGalleryCtrl', ['$scope', '$uibModalInstance', layoutGalleryCtrl]);

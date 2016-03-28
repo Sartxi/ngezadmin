@@ -1,7 +1,7 @@
 <div id="settings" class="container-fluid">
     <div class="row">
         <div class="col-md-12 pageCol">
-            <loader ng-show="loading"></loader>
+            <loader ng-show="vm.loading"></loader>
             <div class="col-md-11">
                 <h1 class="mainTitle"><i class="fa fa-cogs"></i> Settings</h1>
                 <hr>
@@ -11,18 +11,36 @@
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-11">
-                                <span class="userIcon glyphicon glyphicon-user pull-left"></span>
-                                <h3>{{settings.user.name}}<br><small>{{settings.user.role}}</small></h3>
+                                <h3>User Settings</h3>
+                                <br />
+                                <img ng-src="{{vm.userSettings.avatar}}" class="img-circle pull-left avatar" />
+                                <h3>{{vm.user.firstName}} {{vm.user.lastName}}</h3>
                                 <button type="button" class="btn btn-default btn-xs" ng-click="passwordChange()">Change Password</button>
-                                <button type="button" class="btn btn-default btn-xs">Logout</button>
+                                <button type="button" ng-click="vm.logout()" class="btn btn-default btn-xs">Logout</button>
+                            </div>
+                            <div class="col-md-11">
+                                <hr>
+                                <form name="userSettingsForm" class="row" ng-submit="vm.saveUserSettings()">
+                                    <div class="col-md-12">
+                                        <div class="btn-group">
+                                            <label class="btn btn-default btn-sm" ng-model="vm.userSettings.lsMenu" uib-btn-radio="true">ON</label>
+                                            <label class="btn btn-default btn-sm" ng-model="vm.userSettings.lsMenu" uib-btn-radio="false">OFF</label>
+                                        </div>
+                                        <span class="moduleLabels">Collapsed Menu</span>
+                                    </div>
+                                    <div class="col-md-12" ng-show="userSettingsForm.$dirty">
+                                        <br />
+                                        <button type="submit" class="btn btn-success btn-xs">Submit Changes</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12"><br /><br /><hr></div>
                     <div class="col-md-6">
-                        <h3>Modules</h3>
+                        <h3>Website Settings</h3>
                         <br />
-                        <form name="modulesForm" class="row">
+                        <form name="modulesForm" class="row" ng-submit="vm.saveSettings()">
                             <div class="col-md-12">
                                 <div class="btn-group">
                                     <label class="btn btn-default btn-sm" ng-model="vm.settings.landing" uib-btn-radio="true">ON</label>
@@ -56,7 +74,7 @@
                             </div>
                             <div class="col-md-12" ng-show="modulesForm.$dirty">
                                 <br />
-                                <button type="button" class="btn btn-success">Submit Changes</button>
+                                <button type="submit" class="btn btn-success btn-xs">Submit Changes</button>
                             </div>
                         </form>
                         <br /><br />
