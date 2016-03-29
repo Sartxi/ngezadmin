@@ -1,0 +1,16 @@
+<div class="modal-header">
+	<a class="pull-right" type="button" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+    <h3 class="modal-title">{{title}}</h3>
+</div>
+<div id="imageGallery" class="modal-body">
+	<div class="row imageGallery">
+		<!-- Image Gallery -->
+		<div ng-repeat="avatar in avatars" class="col-md-3 imageItem">
+			<div class="panel panel-default panel-custom imgBtn" ng-click="useAvatar(avatar)">
+				<div class="panel-body text-center">
+					<img ng-src="{{avatar.avatar}}" class="img-responsive" style="margin:0 auto;">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

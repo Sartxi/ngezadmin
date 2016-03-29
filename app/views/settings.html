@@ -3,7 +3,7 @@
         <div class="col-md-12 pageCol">
             <loader ng-show="vm.loading"></loader>
             <div class="col-md-11">
-                <h1 class="mainTitle"><i class="fa fa-cogs"></i> Settings</h1>
+                <h1 class="mainTitle"><i class="fa fa-cogs accentText"></i> Settings</h1>
                 <hr>
             </div>
             <div class="col-md-11">
@@ -13,7 +13,7 @@
                             <div class="col-md-11">
                                 <h3>User Settings</h3>
                                 <br />
-                                <img ng-src="{{vm.userSettings.avatar}}" class="img-circle pull-left avatar" />
+                                <img ng-src="{{vm.userSettings.avatar}}" class="img-circle pull-left avatar" ng-click="vm.changeAvatar()" />
                                 <h3>{{vm.user.firstName}} {{vm.user.lastName}}</h3>
                                 <button type="button" class="btn btn-default btn-xs" ng-click="passwordChange()">Change Password</button>
                                 <button type="button" ng-click="vm.logout()" class="btn btn-default btn-xs">Logout</button>
