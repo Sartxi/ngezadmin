@@ -93,7 +93,7 @@ angular.module('ezadmin', [
             {
 
                 taOptions.toolbar = [
-                    ['h2', 'h3', 'h4', 'h5', 'p', 'quote'],
+                    ['h1', 'h2', 'h3', 'h4', 'h5', 'p', 'quote'],
                     ['bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol'],
                     ['justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent'],
                     ['html', 'insertLink', 'insertVideo']
