@@ -21,8 +21,8 @@ angular.module('ezadmin', [
 .config(['$stateProvider','$httpProvider', '$urlRouterProvider', 'BackandProvider', '$provide',
     function($stateProvider, $httpProvider, $urlRouterProvider, BackandProvider, $provide)
     {
-        BackandProvider.setAnonymousToken('f8c1eb11-4b3b-4916-823a-2fd431ea277c');
-        BackandProvider.setSignUpToken('e19b5a4d-f8b6-4dc7-b459-ad6517120dc2');
+        BackandProvider.setAnonymousToken('fef44aed-1c78-4bd3-80e7-2d2ada73384c');
+        BackandProvider.setSignUpToken('45c0bed1-1227-4e24-8ae9-137be7f5efed');
 
         $httpProvider.interceptors.push('httpInterceptor');
 

@@ -15,12 +15,12 @@
         var self = this;
 
         function init() {
-            request.name = 'pages';
             self.loading = true;
             getPages();
         }
 
         function getPages() {
+            request.name = 'pages';
             request.getObjects().then(function (res) {
                 self.loading = false;
                 self.pages = res.data;
@@ -53,7 +53,7 @@
             request.getObject(id).then(function (res) {
                 self.page = res;
                 self.loading = false;
-                self.editContent('enContent'); //default to English
+                self.editContent('en'); //default to English
             }, function (err) {
                 growl.add('danger', err, 3000);
                 self.loading = false;
@@ -72,7 +72,25 @@
             request.getObject(id).then(function (res) {
                 self.loading = false;
                 self.page = res;
-                self.content = self.page[lng][0];
+                var content = res.content;
+                if (content.length > 0) {
+                    var lngMatch;
+                    angular.forEach(content, function (obj) {
+                        if (obj.language === lng) {
+                            self.content = obj;
+                            lngMatch = true;
+                        }
+                    });
+                    if (!lngMatch) {
+                        self.content = {language: lng}
+                    }
+                } else {
+                    var newContentarray = [];
+                    var newContent = {};
+                        newContent.language = lng;
+                    newContentarray.push(newContent);
+                    self.content = newContentarray[0];
+                }
             });
         }
 
@@ -83,7 +101,7 @@
         self.saveContent = function (data) {
             self.loading = true;
             var params = {
-                name: self.openContent,
+                name: 'content',
                 type: 'page',
                 pageId: self.page.id
             }

@@ -21,9 +21,7 @@
                 var exCats = content.catagories;
                 angular.forEach(orgs.catagories, function (cat) {
                     if (!exists(cat, exCats)) {
-                        var data = {text: cat.text}
-                        if (name === 'enContent') {data.enContentId = content.id}
-                        if (name === 'esContent') {data.esContentId = content.id}
+                        var data = {text: cat.text, contentId: content.id}
                         request.name = 'postCatagories';
                         request.create(data);
                     }
@@ -33,9 +31,7 @@
                 var exTags = content.tags;
                 angular.forEach(orgs.tags, function (tag) {
                     if (!exists(tag, exTags)) {
-                        var data = {text: tag.text}
-                        if (name === 'enContent') {data.enContentId = content.id}
-                        if (name === 'esContent') {data.esContentId = content.id}
+                        var data = {text: tag.text, contentId: content.id}
                         request.name = 'postTags';
                         request.create(data);
                     }

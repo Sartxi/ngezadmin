@@ -31,6 +31,24 @@ angular.module('ezadmin')
 		}
 	};
 })
+.directive('lndPgDetails', function () {
+	return {
+		restrict: 'EA',
+		scope: {
+			dynamic: '=',
+			page: '=',
+			publish: '&',
+			delete: '&'
+		},
+		templateUrl: 'views/partials/lndPageDetails.html',
+		link: function (scope, elem, attrs) {
+			//set form pristine on submit
+			elem.on('submit', function () {
+				scope.details.$setPristine();
+			});
+		}
+	};
+})
 .directive('postListing', function () {
 	return {
 		restrict: 'EA',

@@ -27,7 +27,7 @@
             var defer = $q.defer();
 
             $http.get(Backand.getApiUrl() + baseUrl + self.name + '/' + id, {
-                params: {deep: true}
+                params: {deep: true, exclude: 'metadata,totalRows'}
             })
 			.success(function (res) {
 				defer.resolve(res);

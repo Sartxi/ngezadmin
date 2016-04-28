@@ -83,7 +83,7 @@
             request.getObject(id).then(function (res) {
                 self.page = res;
                 self.loading = false;
-                self.editContent('enContent');
+                self.editContent('en');
                 watchDate();
             }, function (err) {
                 growl.add('danger', err, 3000);
@@ -104,7 +104,25 @@
             request.getObject(id).then(function (res) {
                 self.loading = false;
                 self.page = res;
-                self.content = self.page[lng][0];
+                var content = res.content;
+                if (content.length > 0) {
+                    var lngMatch;
+                    angular.forEach(content, function (obj) {
+                        if (obj.language === lng) {
+                            self.content = obj;
+                            lngMatch = true;
+                        }
+                    });
+                    if (!lngMatch) {
+                        self.content = {language: lng}
+                    }
+                } else {
+                    var newContentarray = [];
+                    var newContent = {};
+                        newContent.language = lng;
+                    newContentarray.push(newContent);
+                    self.content = newContentarray[0];
+                }
             });
         }
 
@@ -125,7 +143,7 @@
         self.saveContent = function (data, orgs) {
             self.loading = true;
             var params = {
-                name: self.openContent,
+                name: 'content',
                 type: 'post',
                 pageId: self.page.id
             }

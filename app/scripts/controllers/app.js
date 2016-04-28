@@ -14,8 +14,10 @@
         var self = this;
 
         function init() {
-            settings();
-            userSettings();
+            if ($window.localStorage.BACKANDuser) {
+                settings();
+                userSettings();
+            }
         }
 
         function settings() {

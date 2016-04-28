@@ -14,7 +14,7 @@
         function init() {
             self.username = '';
             self.password = '';
-            self.appName  = 'sdbetg';
+            self.appName  = 'frantic';
         }
 
         self.signIn = function() {
