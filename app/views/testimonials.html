@@ -1,0 +1,46 @@
+<div id="testimonials" class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 pageCol">
+            <loader ng-show="vm.loading"></loader>
+            <div class="col-md-11">
+                <h1 class="mainTitle"><i class="glyphicon glyphicon-comment accentText"></i> Testimonials</h1>
+                <hr>
+            </div>
+            <div class="col-md-11">
+                <form name="pageTools" class="form-inline row" ng-init="sortReverse = false">
+                    <div class="col-md-2 col-sm-3" ng-hide="vm.testimonials.length == 0 || !vm.testimonials">
+                        <a class="btn btn-default btn-block" ng-click="vm.create()"><span class="glyphicon glyphicon-plus"></span> New Testimonial</a>
+                        <br class="visible-xs" ng-hide="vm.testimonials.length <= 10" />
+                    </div>
+                    <div class="col-md-4 col-sm-4" ng-hide="vm.testimonials.length <= 10">
+                        <input class="form-control input-block" ng-model="pagesFilter" placeholder="Filter By Author">
+                        <br class="visible-xs" />
+                    </div>
+                    <div class="col-md-6 col-sm-5" ng-hide="vm.testimonials.length <= 10">
+                        <div class="btn-group pull-right">
+                            <label class="btn btn-default" ng-model="sortReverse" uib-btn-radio="true">Asc</label>
+                            <label class="btn btn-default" ng-model="sortReverse" uib-btn-radio="false">Desc</label>
+                        </div>
+                        <br class="visible-xs" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-11 editingTable" ng-show="vm.testimonials.length !== 0">
+                <div class="tableHead">
+                    <div class="col-md-12">
+                        <i ng-hide="vm.testimonials.length <= 10" ng-click="sortType = 'name'; sortReverse = !sortReverse" class="sorter fa" ng-class="{'fa-chevron-circle-up': !sortReverse, 'fa-chevron-circle-down': sortReverse}"></i> Author
+                    </div>
+                </div>
+                <div class="well well-sm" ng-show="(vm.testimonials | filter: pagesFilter).length == 0">Sorry, no results for <strong class="accentText">{{pagesFilter}}</strong></div>
+                <div class="editingRow" dir-paginate="test in vm.testimonials | filter: pagesFilter | orderBy: sortType:!sortReverse | itemsPerPage: 10">
+                    <testimonial-listing testimonial="test" edit="vm.update(test)"></testimonial-listing>
+                </div>
+                <dir-pagination-controls></dir-pagination-controls>
+            </div>
+            <div class="col-md-11 editingTable" ng-show="vm.testimonials.length == 0 || !vm.testimonials">
+                <button type="button" class="btn-panel" ng-click="vm.create()"><span class="emtAddBtnIcon glyphicon glyphicon-plus"></span>ADD A TESTIMONIAL</button>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>

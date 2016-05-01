@@ -81,6 +81,12 @@ angular.module('ezadmin', [
                 '@': {templateUrl: 'views/lndpages.page.html'}
             }
         })
+        .state('testimonials', {
+            url: '/testimonials',
+            title: 'EZ Admin | Testimonials',
+            templateUrl: 'views/testimonials.html',
+            controller: 'TestimonialsCtrl as vm'
+        })
         .state('settings', {
             url: '/setting',
             title: 'Snap Admin | Settings',

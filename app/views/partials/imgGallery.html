@@ -10,7 +10,7 @@
 			<div class="row">
 				<form name="uploadImage">
 					<div class="col-md-12">
-						<button type="button" class="btn btn-default btn-sm" ngf-select ng-model="imgFile" name="file" ngf-accept="'image/*'"><span class="glyphicon glyphicon-search"></span> Choose Image</button>
+						<button type="button" class="btn btn-default btn-sm" ngf-select ng-model="imgFile" name="file" ngf-accept="'image/*'" ngf-max-size="5MB"><span class="glyphicon glyphicon-search"></span> Choose Image</button>
 						<div ngf-drop ngf-select class="dropBox" ng-hide="imgFile" ng-model="imgFile" name="dragDrop" ngf-accept="'image/*'" ngf-allow-dir="true" ngf-drag-over-class="'dragover'">
 							<span class="fa fa-picture-o"></span> Drop Image Here
 						</div>

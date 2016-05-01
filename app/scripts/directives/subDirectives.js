@@ -1,6 +1,16 @@
 'use strict';
 
 angular.module('ezadmin')
+.directive('testimonialListing', function () {
+	return {
+		restrict: 'EA',
+		scope: {
+			testimonial: '=',
+			edit: '&'
+		},
+		templateUrl: 'views/partials/testimonialListing.html'
+	};
+})
 .directive('pgListing', function () {
 	return {
 		restrict: 'EA',

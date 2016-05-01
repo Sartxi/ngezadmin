@@ -1,0 +1,45 @@
+<div id="newPage" class="modal-body">
+	<div class="text-right">
+		<a ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span></a>
+	</div>
+	<form name="newPageForm" class="row" ng-submit="ok(test)">
+		<div class="form-group col-md-6">
+			<label>Author:</label>
+			<input type="text" ng-model="test.author" class="form-control" required>
+		</div>
+		<div class="form-group col-md-6">
+			<label>Location</label>
+			<input type="text" class="form-control" placeholder="city, state" ng-model="test.location">
+		</div>
+		<div class="col-md-12">
+			<ul class="nav nav-tabs testTabs" ng-show="settings.spanish">
+				<li ng-class="{active: en}" uib-tooltip="English"><a ng-click="en = !en; es = !es">EN</a></li>
+				<li ng-class="{active: es}" uib-tooltip="Spanish"><a ng-click="en = !en; es = !es">ES</a></li>
+			</ul>
+		</div>
+		<div class="form-group col-md-12" ng-show="en">
+			<textarea rows="4" class="form-control" ng-model="test.enBody"></textarea>
+		</div>
+		<div class="form-group col-md-12" ng-show="es">
+			<textarea rows="4" class="form-control" ng-model="test.esBody"></textarea>
+		</div>
+		<div class="form-group col-md-6">
+			<label>Back Drop</label><br>
+			<button type="button" class="btn btn-default btn-sm" ngf-select ng-model="background" name="file" ngf-accept="'image/*'" ngf-max-size="5MB"><span class="glyphicon glyphicon-search"></span> Choose Image</button>
+			<span ngf-thumbnail="background"></span>
+		</div>
+		<div class="form-group col-md-6">
+			<label>Avatar</label><br>
+			<button type="button" class="btn btn-default btn-sm" ngf-select ng-model="avatar" name="file" ngf-accept="'image/*'" ngf-max-size="5MB"><span class="glyphicon glyphicon-search"></span> Choose Image</button>
+			{{avatar}}
+		</div>
+		<div class="form-group col-md-6">
+			<label>Video URL</label>
+			<input type="text" class="form-control" ng-model="test.video">
+		</div>
+		<div class="col-md-12">
+			<br />
+			<button type="submit" class="btn btn-success" ng-disabled="newPageForm.$invalid">{{btntext}}</button>
+		</div>
+	</form>
+</div>
