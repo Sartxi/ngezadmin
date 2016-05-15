@@ -10,7 +10,7 @@
      */
 
 
-    function SettingsCtrl($state, request, $sessionStorage, $window, growl, $uibModal) {
+    function SettingsCtrl($state, request, $sessionStorage, $localStorage, $window, growl, $uibModal) {
         var self = this;
 
         function init() {
@@ -98,6 +98,7 @@
         }
 
         self.logout = function () {
+            $localStorage.userAuth = false;
             request.name = 'users';
             request.logout();
             $state.go('login');
@@ -142,6 +143,6 @@
     }
 
     angular.module('ezadmin')
-        .controller('SettingsCtrl', ['$state', 'request', '$sessionStorage', '$window', 'growl', '$uibModal', SettingsCtrl])
+        .controller('SettingsCtrl', ['$state', 'request', '$sessionStorage', '$localStorage', '$window', 'growl', '$uibModal', SettingsCtrl])
         .controller('AvatarGallCtrl', ['$scope', '$uibModalInstance', AvatarGallCtrl]);
 })();
