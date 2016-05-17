@@ -19,11 +19,11 @@
                     <label>Meta Key Words</label>
                     <input type="text" ng-model="page.metaKeywords" class="form-control">
                 </div>
-                <div class="form-group col-md-12 wysyEdit" ng-hide="page.page.name === 'Home'">
+                <div class="form-group col-md-12 wysyEdit" ng-show="page.page.name === 'Contact'">
                     <label>Page Body</label>
                     <text-angular ng-model="page.pageHtml" ng-if="!loading"></text-angular>
                 </div>
-                <div ng-show="page.page.name === 'Home'">
+                <div ng-hide="page.page.name === 'Contact'">
                     <div class="col-md-12"><hr></div>
                     <div class="form-group col-lg-4 col-md-6">
                         <label>Content Block 1</label>
