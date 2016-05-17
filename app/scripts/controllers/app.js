@@ -10,15 +10,25 @@
      */
 
 
-    function AppCtrl($rootScope, $state, request, $sessionStorage, $window) {
+    function AppCtrl($scope, $rootScope, $state, request, $sessionStorage, $localStorage, $window) {
         var self = this;
+        var scope = $scope;
 
         function init() {
-            if ($window.localStorage.BACKANDuser) {
+            if ($window.localStorage.BACKANDuser && $localStorage.userAuth) {
                 settings();
                 userSettings();
             }
         }
+
+        scope.$watch(function () {
+		   return $localStorage;
+		}, function (newVal, oldVal) {
+            if (newVal.userAuth) {
+                settings();
+                userSettings();
+            }
+		}, true);
 
         function settings() {
             var id = 1;
@@ -41,6 +51,7 @@
         }
 
         self.logout = function () {
+            $localStorage.userAuth = false;
             request.name = 'users';
             request.logout();
             $state.go('login');
@@ -192,7 +203,7 @@
     }
 
     angular.module('ezadmin')
-        .controller('AppCtrl', ['$rootScope', '$state', 'request', '$sessionStorage', '$window', AppCtrl])
+        .controller('AppCtrl', ['$scope', '$rootScope', '$state', 'request', '$sessionStorage', '$localStorage', '$window', AppCtrl])
         .controller('NewPageCtrl', ['$scope', '$uibModalInstance', NewPageCtrl])
         .controller('ImgGalleryCtrl', ['$scope', 'request', '$uibModalInstance', ImgGalleryCtrl])
         .controller('layoutGalleryCtrl', ['$scope', '$uibModalInstance', layoutGalleryCtrl]);

@@ -8,7 +8,7 @@
      * # LoginCtrl
      * Backand login control - need to implement in order to get the token for authentication
      */
-    function LoginCtrl(Backand, $location) {
+    function LoginCtrl(Backand, $location, $localStorage) {
         var self = this;
 
         function init() {
@@ -24,6 +24,7 @@
             //sign in to Backand
             Backand.signin(self.username, self.password)
                 .then(function () {
+                    $localStorage.userAuth = true;
                     $location.path('/');
                 }, function (data) {
                     self.error = data && data.error_description || 'Unknown error from server';
@@ -34,5 +35,5 @@
     }
 
     angular.module('ezadmin')
-        .controller('LoginCtrl', ['Backand', '$location', LoginCtrl]);
+        .controller('LoginCtrl', ['Backand', '$location', '$localStorage', LoginCtrl]);
 })();

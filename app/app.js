@@ -159,6 +159,12 @@ angular.module('ezadmin', [
         $rootScope.$on('$stateChangeSuccess', function (event, toState) {
             $rootScope.pageTitle = toState.title;
             $anchorScroll();
+            //login
+            if (toState.name === 'login') {
+                $rootScope.login = true;
+            } else {
+                $rootScope.login = false;
+            }
         });
     }
 ]);
