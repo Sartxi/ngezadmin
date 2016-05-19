@@ -23,10 +23,18 @@
             request.getObjects().then(function (res) {
                 self.testimonials = res.data;
                 self.loading = false;
+                getMerchTestimonials();
             });
         }
 
-        self.create = function () {
+        function getMerchTestimonials() {
+            request.name = 'merchTestimonials';
+            request.getObjects().then(function (res) {
+                self.merchtestimonials = res.data;
+            });
+        }
+
+        self.create = function (testname) {
 			var action = 'Create ';
 			var testimonial;
             var newTestimonial = $uibModal.open({
@@ -45,7 +53,7 @@
             });
 
             newTestimonial.result.then(function (data) {
-                request.name = 'testimonials';
+                request.name = testname;
                 request.create(data).then(function (res) {
 					growl.add('success', 'Testimonial Created', 3000);
                 }, function (err) {
@@ -53,7 +61,7 @@
                 });
             });
         };
-		self.update = function (testimonial) {
+		self.update = function (testimonial, testname) {
 			var action = 'Update ';
             var editTestimonial = $uibModal.open({
                 animation: true,
@@ -71,7 +79,7 @@
             });
 
             editTestimonial.result.then(function (data) {
-                request.name = 'testimonials';
+                request.name = testname;
                 request.update(data.id, data).then(function (res) {
 					growl.add('success', 'Testimonial Updated', 3000);
                 }, function (err) {
