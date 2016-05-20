@@ -30,38 +30,38 @@ angular.module('ezadmin', [
         $stateProvider
         .state('login', {
             url: '/login',
-            title: 'Login to NG-EZ Admin',
+            title: 'Login to Snap Admin',
             templateUrl: 'views/login.html',
             controller: 'LoginCtrl as vm'
         })
         .state('analytics', {
             url: '/analytics',
-            title: 'EZ Admin | Analytics',
+            title: 'Admin | Analytics',
             templateUrl: 'views/analytics.html',
             controller: 'AnalyticsCtrl as vm'
         })
         .state('pages', {
             url: '/pages',
-            title: 'EZ Admin | Pages',
+            title: 'Admin | Pages',
             templateUrl: 'views/pages.html',
             controller: 'PagesCtrl as vm'
         })
         .state('pages.page', {
             url: '/:id',
-            title: 'EZ Admin | Page',
+            title: 'Admin | Page',
             views: {
                 '@': {templateUrl: 'views/pages.page.html'}
             }
         })
         .state('blog', {
             url: '/blog',
-            title: 'EZ Admin | Blog',
+            title: 'Admin | Blog',
             templateUrl: 'views/blog.html',
             controller: 'BlogCtrl as vm'
         })
         .state('blog.post', {
             url: '/:id',
-            title: 'EZ Admin | Blog Post',
+            title: 'Admin | Blog Post',
             controller: 'PostCtrl as vm',
             views: {
                 '@': {templateUrl: 'views/blog.post.html'}
@@ -69,13 +69,13 @@ angular.module('ezadmin', [
         })
         .state('lndPages', {
             url: '/landing-pages',
-            title: 'EZ Admin | Landing Pages',
+            title: 'Admin | Landing Pages',
             templateUrl: 'views/lndpages.html',
             controller: 'LndPagesCtrl as vm'
         })
         .state('lndPages.lndpage', {
             url: '/:id',
-            title: 'EZ Admin | Landing Page',
+            title: 'Admin | Landing Page',
             controller: 'LndPageCtrl as vm',
             views: {
                 '@': {templateUrl: 'views/lndpages.page.html'}
@@ -83,13 +83,13 @@ angular.module('ezadmin', [
         })
         .state('testimonials', {
             url: '/testimonials',
-            title: 'EZ Admin | Testimonials',
+            title: 'Admin | Testimonials',
             templateUrl: 'views/testimonials.html',
             controller: 'TestimonialsCtrl as vm'
         })
         .state('settings', {
             url: '/setting',
-            title: 'Snap Admin | Settings',
+            title: 'Admin | Settings',
             templateUrl: 'views/settings.html',
             controller: 'SettingsCtrl as vm'
         });

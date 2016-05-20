@@ -181,7 +181,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
         .login-panel {position: absolute; top: 60px; width: 100%; padding: 15px 30px; max-width: 500px; left: 0; right: 0; margin: 0 auto;}
     }
     .loginBackDrop {
-        background: $solid url('../assets/images/logintexture.png');
+        background: $solid url('../assets/images/loginbg.png');
         position: fixed;
         top: 0;
         bottom: 0;
@@ -248,7 +248,7 @@ ul.nav li.dropdown:hover > ul.dropdown-menu {display: block;}
     }
     #userInfo {
         position: relative;
-        .userLogo {position: fixed; right: 20px; top: 20px; max-width: 100px; z-index: 6; background: white; @include rad(8px); padding: 5px;}
+        .userLogo {position: fixed; right: 20px; top: 20px; max-width: 125px; z-index: 6; background: white; @include rad(8px); padding: 5px;}
     }
     .loading {
         position:absolute;
