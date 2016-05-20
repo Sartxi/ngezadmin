@@ -24,6 +24,7 @@ angular.module('ezadmin', [
         BackandProvider.setAnonymousToken('fef44aed-1c78-4bd3-80e7-2d2ada73384c');
         BackandProvider.setSignUpToken('45c0bed1-1227-4e24-8ae9-137be7f5efed');
 
+        
         $httpProvider.interceptors.push('httpInterceptor');
 
         $urlRouterProvider.otherwise('/pages');
