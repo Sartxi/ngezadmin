@@ -76,6 +76,7 @@ angular.module('ezadmin')
 			page: '=',
 			orgs: '=',
 			publish: '&',
+			lng: '=',
 			delete: '&'
 		},
 		templateUrl: 'views/partials/postDetails.html',
@@ -103,6 +104,7 @@ angular.module('ezadmin')
 			};
 			//creates tags/catagories
 			function createTag(newTag, name) {
+				newTag.language = scope.lng;
 				request.name = name;
 				request.create(newTag);
 			}

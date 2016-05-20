@@ -82,7 +82,6 @@
             request.name = 'blog';
             request.getObject(id).then(function (res) {
                 self.page = res;
-                self.loading = false;
                 self.editContent('en');
                 watchDate();
             }, function (err) {

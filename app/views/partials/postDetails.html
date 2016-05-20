@@ -33,7 +33,7 @@
                             load-on-empty="true">
                         </auto-complete>
                     </tags-input>
-                    <span class="label label-success orgsLabel" ng-repeat="cat in page.catagories">{{cat.text}} <a ng-click="deleteOrgs(cat.id, 'postCatagories')"><span class="glyphicon glyphicon-remove"></span></a></span>
+                    <span class="label label-success orgsLabel" ng-repeat="cat in page.catagories track by $index">{{cat.text}} <a ng-click="deleteOrgs(cat.id, 'postCatagories')"><span class="glyphicon glyphicon-remove"></span></a></span>
                 </div>
                 <div class="form-group col-md-6 animate-show" ng-hide="!page.title">
                     <label>Tags</label>
@@ -45,7 +45,7 @@
                             load-on-empty="true">
                         </auto-complete>
                     </tags-input>
-                    <span class="label label-success orgsLabel" ng-repeat="cat in page.tags">{{cat.text}} <a ng-click="deleteOrgs(cat.id, 'postTags')"><span class="glyphicon glyphicon-remove"></span></a></span>
+                    <span class="label label-success orgsLabel" ng-repeat="cat in page.tags track by $index">{{cat.text}} <a ng-click="deleteOrgs(cat.id, 'postTags')"><span class="glyphicon glyphicon-remove"></span></a></span>
                 </div>
                 <div class="col-md-12">
                     <br />
